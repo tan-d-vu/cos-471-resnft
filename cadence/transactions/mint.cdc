@@ -1,4 +1,4 @@
-import ExampleNFT from "../contracts/my-token.cdc"
+import ExampleNFT from "../contracts/ExampleNFT.cdc"
 
 // This transaction allows the Minter account to mint an NFT
 // and deposit it into its collection.
@@ -15,7 +15,7 @@ transaction(name: String, description: String) {
         // Get the owner's collection capability and borrow a reference
         self.receiverRef = acct.getCapability<&{ExampleNFT.NFTReceiver}>(ExampleNFT.CollectionPublicPath)
             .borrow()
-            ?? panic("Could not borrow receiver reference")
+            ?? panic("Minting err: Could not borrow receiver reference")
     }
 
     execute {

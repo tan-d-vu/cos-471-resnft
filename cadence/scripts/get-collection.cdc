@@ -1,8 +1,6 @@
-import ExampleNFT from "../contracts/my-token.cdc"
+import ExampleNFT from "../contracts/ExampleNFT.cdc"
 
-// Print the NFTs owned by accounts 0x01 and 0x02.
 pub fun main(acct_addr: Address) {
-
     // Get both public account objects
     let account = getAccount(acct_addr)
 
@@ -14,7 +12,7 @@ pub fun main(acct_addr: Address) {
         ?? panic("Could not borrow receiver reference")
 
     // Print collection as arrays of IDs
-    log(receiverRef)
-    log("Account NFTs")
+    log("Account NFTs:")
     log(receiverRef.getIDs())
 }
+

@@ -1,4 +1,4 @@
-import ExampleNFT from "../contracts/my-token.cdc"
+import ExampleNFT from "../contracts/ExampleNFT.cdc"
 
 // This transaction configures a user's account
 // to use the NFT contract by creating a new empty collection,
@@ -20,6 +20,10 @@ transaction {
             acct.link<&{ExampleNFT.NFTReceiver}>(ExampleNFT.CollectionPublicPath, target: ExampleNFT.CollectionStoragePath)
 
             log("Capability created")
+        }
+        else {
+            log("Collection already exists for account:")
+            log(acct.address.toString())
         }
     }
 }
