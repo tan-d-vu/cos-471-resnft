@@ -1,0 +1,28 @@
+{
+	"contracts": {
+		"ExampleNFT": "cadence/contracts/my-token.cdc"
+	},
+	"networks": {
+		"emulator": "127.0.0.1:3569",
+		"mainnet": "access.mainnet.nodes.onflow.org:9000",
+		"sandboxnet": "access.sandboxnet.nodes.onflow.org:9000",
+		"testnet": "access.devnet.nodes.onflow.org:9000"
+	},
+	"accounts": {
+		"default": {
+			"address": "f669cb8d41ce0c74",
+			"key": "02ed70dadaa38ce04428d70c4aa4dba7e80dcc28d662bd5d8c23a0c174edb510"
+		},
+		"emulator-account": {
+			"address": "f8d6e0586b0a20c7",
+			"key": "ef6b4821b034550a284eca999405fd044761c902e3b1189e48dfa92adc762938"
+		}
+	},
+	"deployments": {
+		"emulator": {
+			"default": [
+				"ExampleNFT"
+			]
+		}
+	}
+}
