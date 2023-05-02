@@ -1,7 +1,7 @@
 import react, { useState, useEffect } from "react";
 import * as fcl from "@onflow/fcl";
-import { getData } from "./cadence/scripts/getData.js";
-import { useParams } from "react-router-dom";
+import { getData } from "../../cadence/scripts/getData.js";
+import { useRouter } from 'next/router'
 
 fcl
   .config()
@@ -12,13 +12,13 @@ fcl
 
 function Restaurant() {
   const [myNFT, setMyNFT] = useState();
-  const params = useParams();
-  const publicKey = params.publicKey;
+  const router = useRouter()
+  const { publickey } = router.query
 
   const GetMyNFT = async () => {
     const response = await fcl.send([
       fcl.script(getData),
-      fcl.args([fcl.arg(publicKey, fcl.t.Address)]),
+      fcl.args([fcl.arg(publickey, fcl.t.Address)]),
     ]);
     const data = await fcl.decode(response);
     setMyNFT(data);

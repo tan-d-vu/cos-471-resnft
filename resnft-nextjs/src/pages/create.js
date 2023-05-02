@@ -1,4 +1,3 @@
-import "../App.css";
 import React from 'react';
 import react, { useState, useEffect } from "react";
 import * as fcl from "@onflow/fcl";

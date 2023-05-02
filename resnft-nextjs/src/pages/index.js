@@ -13,7 +13,7 @@ fcl
   .put("accessNode.api", "https://rest-testnet.onflow.org")
   .put("discovery.wallet", "https://fcl-discovery.onflow.org/testnet/authn");
 
-function Home() {
+function Index() {
   const [user, setUser] = useState();
   const [totalSupply, setTotalSupply] = useState();
   const [myNFT, setMyNFT] = useState();
@@ -131,4 +131,4 @@ function Home() {
     );
 }
 
-export default Home;
+export default Index;

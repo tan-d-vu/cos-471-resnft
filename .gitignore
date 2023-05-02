@@ -12,6 +12,7 @@
 
 # Since we have tooling that uses node
 node_modules
+.next
 
 .DS_Store
 

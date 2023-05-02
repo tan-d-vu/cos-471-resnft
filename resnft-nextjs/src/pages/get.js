@@ -1,4 +1,3 @@
-import "../App.css";
 import React, { useState, useEffect } from "react";
 import * as fcl from "@onflow/fcl";
 import { getData } from "../cadence/scripts/getData.js";
@@ -28,7 +27,6 @@ const Get = () => {
         setMyNFT(data);
         console.log(data);
         console.log(myNFT);
-        console.log(myNFT.type);
     };
     return(
         <div class="App">
