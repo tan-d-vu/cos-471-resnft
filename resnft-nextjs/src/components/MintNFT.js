@@ -3,13 +3,15 @@ import react, { useState, useEffect } from "react";
 import * as fcl from "@onflow/fcl";
 import { mint } from "../cadence/transactions/mint.js";
 
-const MintNFT = ({ authz }) => {
+const MintNFT = () => {
   const [mintBond, setMintBond] = useState(0);
   const [mintRoyalties, setMintRoyalties] = useState(0);
   const [mintName, setMintName] = useState("");
   const [mintData, setMintData] = useState("");
 
-  const mintNFT = async ({ authz }) => {
+  const authz = fcl.currentUser().authorization;
+
+  const mintNFT = async () => {
     const transactionID = await fcl
       .send([
         fcl.transaction(mint),

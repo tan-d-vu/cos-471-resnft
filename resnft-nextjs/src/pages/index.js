@@ -5,16 +5,10 @@ import { setup } from "../cadence/transactions/setup.js";
 import MintNFT from "@/components/MintNFT.js";
 import GetNFTByID from "@/components/GetNFTByID.js";
 import GetNFTByOwner from "@/components/GetNFTByOwner.js";
-
-fcl
-  .config()
-  .put("app.detail.title", "NFT Dapp")
-  .put("app.detail.icon", "https://i.imgur.com/9I6NRUm.png")
-  .put("accessNode.api", "https://rest-testnet.onflow.org")
-  .put("discovery.wallet", "https://fcl-discovery.onflow.org/testnet/authn");
+import { useAuthContext } from "@/contexts/AuthContext.js";
 
 function Index() {
-  const [user, setUser] = useState();
+  const { user, setUser} = useAuthContext();
 
   const login = () => {
     fcl.authenticate();
@@ -40,8 +34,6 @@ function Index() {
     console.log(transactionID);
   };
 
-  console.log(user);
-
   return (
     <div className="App">
       {!user || !user.addr ? (
@@ -61,7 +53,7 @@ function Index() {
             Setup{" "}
           </button>
           <p> ----------------------</p>
-          <MintNFT authz={fcl.authz} />
+          <MintNFT />
           <p> ----------------------</p>
           <GetNFTByOwner addr={user.addr} />
           <p> ----------------------</p>

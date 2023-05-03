@@ -1,11 +1,11 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useAuthContext } from "@/contexts/AuthContext";
 import * as fcl from "@onflow/fcl";
 import Link from "next/link";
 
 function Navbar() {
-  const [user, setUser] = useState();
-  
+  const { user, setUser } = useAuthContext();
+
   const login = () => {
     fcl.authenticate();
     fcl.currentUser().subscribe(setUser);
@@ -15,7 +15,7 @@ function Navbar() {
     fcl.unauthenticate();
     setUser(null);
   };
-  
+
   return (
     <div className="nav">
       <div className="navbar">
@@ -42,14 +42,21 @@ function Navbar() {
           </div>
         </div>
         <div className="Nav-Btns">
-          <button onClick={login} className="Nav-Button">
-            <h2>Login</h2>
-          </button>
+          {!user || !user.addr ? (
+            <button onClick={login} className="Nav-Button">
+              <h2>Login</h2>
+            </button>
+          ) : (
+            ""
+          )}
 
-          <button onClick={logout} className="Nav-Button">
-            
-            <h2>Logout</h2>
-          </button>
+          {user && user.addr ? (
+            <button onClick={logout} className="Nav-Button">
+              <h2>Logout</h2>
+            </button>
+          ) : (
+            ""
+          )}
         </div>
         <h1 className="SiteName"> Flow NFT </h1>
       </div>
