@@ -1,5 +1,5 @@
-import { Html, Head, Main, NextScript } from 'next/document'
-import Navbar from '@/components/navbar'
+import { Html, Head, Main, NextScript } from "next/document";
+import Navbar from "@/components/Navbar";
 
 export default function Document() {
   return (
@@ -11,5 +11,5 @@ export default function Document() {
         <NextScript />
       </body>
     </Html>
-  )
+  );
 }

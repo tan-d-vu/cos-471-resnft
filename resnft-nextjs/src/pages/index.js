@@ -1,10 +1,10 @@
-import React from 'react';
-import react, { useState, useEffect } from "react";
+import React from "react";
+import { useState } from "react";
 import * as fcl from "@onflow/fcl";
-import { getData } from "../cadence/scripts/getData.js";
 import { setup } from "../cadence/transactions/setup.js";
-import { mint } from "../cadence/transactions/mint.js";
-// import {user, login, setupAccount, mintName, setMintName, mintData, setMintData, mintBond, setMintBond, mintRoyalties, setMintRoyalties, mintNFT, GetMyNFT, myNFT} from '../App.js';
+import MintNFT from "@/components/MintNFT.js";
+import GetNFTByID from "@/components/GetNFTByID.js";
+import GetNFTByOwner from "@/components/GetNFTByOwner.js";
 
 fcl
   .config()
@@ -15,12 +15,6 @@ fcl
 
 function Index() {
   const [user, setUser] = useState();
-  const [totalSupply, setTotalSupply] = useState();
-  const [myNFT, setMyNFT] = useState();
-  const [mintBond, setMintBond] = useState(0);
-  const [mintRoyalties, setMintRoyalties] = useState(0);
-  const [mintName, setMintName] = useState("");
-  const [mintData, setMintData] = useState("");
 
   const login = () => {
     fcl.authenticate();
@@ -30,38 +24,6 @@ function Index() {
   const logout = () => {
     fcl.unauthenticate();
     setUser(null);
-  };
-
-  const GetMyNFT = async () => {
-    const response = await fcl.send([
-      fcl.script(getData),
-      fcl.args([fcl.arg(user.addr, fcl.t.Address)]),
-    ]);
-    const data = await fcl.decode(response);
-    setMyNFT(data);
-    console.log(data);
-    console.log(myNFT);
-    console.log(myNFT.type);
-  };
-
-  const mintNFT = async () => {
-    const transactionID = await fcl
-      .send([
-        fcl.transaction(mint),
-        fcl.args([
-          fcl.arg(mintData, fcl.t.String),
-          fcl.arg(mintBond, fcl.t.UInt64),
-          fcl.arg(mintRoyalties, fcl.t.UFix64),
-          fcl.arg(mintName, fcl.t.String),
-        ]),
-        fcl.payer(fcl.authz),
-        fcl.proposer(fcl.authz),
-        fcl.authorizations([fcl.authz]),
-        fcl.limit(9999),
-      ])
-      .then(fcl.decode);
-
-    console.log(transactionID);
   };
 
   const setupAccount = async () => {
@@ -78,57 +40,40 @@ function Index() {
     console.log(transactionID);
   };
 
-    return (
+  console.log(user);
+
+  return (
     <div className="App">
-      <h2> Current Address : {user && user.addr ? user.addr : ""} </h2>
-      <button onClick={login} className="Gen-Button"> Login </button>
-      <p> ----------------------</p>
+      {!user || !user.addr ? (
+        <button onClick={login} className="Gen-Button">
+          Login
+        </button>
+      ) : (
+        ""
+      )}
 
-      <button onClick={() => setupAccount()} className="Gen-Button"> Setup </button>
-      <p> ----------------------</p>
-      <input
-        type="text"
-        placeholder="Enter Name for NFT"
-        value={mintName}
-        onChange={(e) => setMintName(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="Enter Data for NFT"
-        value={mintData}
-        onChange={(e) => setMintData(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="Enter Bond for NFT"
-        value={mintBond}
-        onChange={(e) => setMintBond(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="Enter Royalties for NFT"
-        value={mintRoyalties}
-        onChange={(e) => setMintRoyalties(e.target.value)}
-      />
-
-      <br />
-      <button onClick={() => mintNFT()} className="Gen-Button"> Create NFT </button>
-
-      <p> ----------------------</p>
-      <button onClick={() => GetMyNFT()} className="Gen-Button"> Get NFT </button>
-      <p> ----------------------</p>
-
-      {myNFT
-        ? myNFT.map((nft, index) => (
-            <div key={index}>
-              <img src={nft.Data} />
-            </div>
-          ))
-        : ""}
-      {myNFT ? myNFT.length : 0}
-      <p> ----------------------</p>
+      {user && user.addr ? (
+        <div>
+          <h2> Current Address : {user.addr} </h2>
+          <p> ----------------------</p>
+          <button onClick={() => setupAccount()} className="Gen-Button">
+            {" "}
+            Setup{" "}
+          </button>
+          <p> ----------------------</p>
+          <MintNFT authz={fcl.authz} />
+          <p> ----------------------</p>
+          <GetNFTByOwner addr={user.addr} />
+          <p> ----------------------</p>
+          <button onClick={logout} className="Gen-Button">
+            Logout
+          </button>
+        </div>
+      ) : (
+        ""
+      )}
     </div>
-    );
+  );
 }
 
 export default Index;
