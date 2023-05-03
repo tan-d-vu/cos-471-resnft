@@ -5,10 +5,17 @@ import Link from "next/link";
 
 function Navbar() {
   const [user, setUser] = useState();
+  
   const login = () => {
     fcl.authenticate();
     fcl.currentUser().subscribe(setUser);
   };
+
+  const logout = () => {
+    fcl.unauthenticate();
+    setUser(null);
+  };
+  
   return (
     <div className="nav">
       <div className="navbar">
@@ -36,12 +43,12 @@ function Navbar() {
         </div>
         <div className="Nav-Btns">
           <button onClick={login} className="Nav-Button">
-            {" "}
-            <h2>Login</h2>{" "}
+            <h2>Login</h2>
           </button>
-          <button onClick={login} className="Nav-Button">
-            {" "}
-            <h2>Logout</h2>{" "}
+
+          <button onClick={logout} className="Nav-Button">
+            
+            <h2>Logout</h2>
           </button>
         </div>
         <h1 className="SiteName"> Flow NFT </h1>
