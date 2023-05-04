@@ -37,7 +37,15 @@ function Navbar() {
           <div className="dropdown-content">
             <Link href="/">Home</Link>
             <Link href="/mint">Mint NFT</Link>
-            <Link href="/get">Get NFT</Link>
+
+            {user && user.addr ? (
+              <Link href={`/restaurants/${encodeURIComponent(user.addr)}`}>
+                Get NFT
+              </Link>
+            ) : (
+              ""
+            )}
+
             <Link href="/about">About</Link>
           </div>
         </div>
