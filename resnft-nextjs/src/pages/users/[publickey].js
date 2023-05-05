@@ -1,12 +1,22 @@
 import { useState } from "react";
 import GetNFTByOwner from "../../components/nfts/GetNFTByOwner";
 import prisma from "../../../prisma/lib/prisma";
-
+import { useAuthContext } from "@/contexts/AuthContext";
+import Link from "next/link";
 const UserProfile = ({ profileData }) => {
-  console.log(profileData);
+  const { user, _ } = useAuthContext();
 
   if (!profileData) {
-    return <div> Loading... </div>;
+    if (!user || !user.addr) {
+      return <div> Sign-in if this is your public key </div>;
+    } else {
+      return (
+        <div>
+          Profile not created.
+          <Link href="/users/update-profile"> Create Profile </Link>
+        </div>
+      );
+    }
   }
 
   return (
@@ -26,7 +36,7 @@ const UserProfile = ({ profileData }) => {
 export default UserProfile;
 
 export async function getServerSideProps(context) {
-	const publickey = context.params.publickey;
+  const publickey = context.params.publickey;
 
   const user = await prisma.user.findUnique({
     where: {

@@ -2,18 +2,24 @@ import React from "react";
 import { useAuthContext } from "@/contexts/AuthContext";
 import * as fcl from "@onflow/fcl";
 import Link from "next/link";
+import { useRouter } from 'next/router';
+
 
 function Navbar() {
   const { user, setUser } = useAuthContext();
 
+  const router = useRouter();
+
   const handleLogin = async () => {
     fcl.authenticate();
     fcl.currentUser().subscribe(setUser);
+    router.push("/users/update-profile");
   };
 
   const logout = () => {
     fcl.unauthenticate();
     setUser(null);
+    router.push("/");
   };
 
   return (

@@ -1,9 +1,11 @@
 import React from "react";
 import { useState } from "react";
 import { useAuthContext } from "@/contexts/AuthContext";
+import { useRouter } from "next/router";
 
 const UpdateProfile = () => {
   const { user, _ } = useAuthContext();
+  const router = useRouter();
 
   const [formData, setFormData] = useState({
     userType: "customer",
@@ -46,6 +48,8 @@ const UpdateProfile = () => {
       .then((res) => res.json())
       .then((data) => console.log(data))
       .catch((error) => console.error(error));
+
+    router.push(`/users/${encodeURIComponent(user.addr)}`);
   };
 
   return (

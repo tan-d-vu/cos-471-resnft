@@ -6,7 +6,7 @@ import GetNFTByOwner from "@/components/nfts/GetNFTByOwner.js";
 import { useAuthContext } from "@/contexts/AuthContext.js";
 
 function Index() {
-  const { user, _} = useAuthContext();
+  const { user, _ } = useAuthContext();
 
   const setupAccount = async () => {
     const transactionID = await fcl
