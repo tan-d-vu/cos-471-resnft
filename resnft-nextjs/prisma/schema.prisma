@@ -11,16 +11,19 @@ datasource db {
 }
 
 model Reservation {
-  id           String  @id
+  id           String   @id
+  datetime     DateTime
   content      String
-  author       User?   @relation(fields: [restaurantID], references: [pubKey])
+  isAvailable  Boolean  @default(true)
+  nft          String?  @unique
+  author       User?    @relation(fields: [restaurantID], references: [pubKey])
   restaurantID String?
 }
 
 model User {
   pubKey       String        @id @unique
   isRestaurant Boolean
-  name         String 
+  name         String
   email        String?       @unique
   phone        String?       @unique
   location     String?

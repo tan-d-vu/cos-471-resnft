@@ -5,14 +5,6 @@ import { useAuthContext } from "@/contexts/AuthContext";
 const UpdateProfile = () => {
   const { user, _ } = useAuthContext();
 
-  if (!user || !user.addr) {
-    return (
-      <div className="update-profile">
-        <h2> Please Sign In to Update Your Profile </h2>
-      </div>
-    );
-  }
-
   const [formData, setFormData] = useState({
     userType: "customer",
     name: "",
@@ -21,8 +13,18 @@ const UpdateProfile = () => {
     location: "",
     menu: "",
     description: "",
-    pubKey: user.addr,
+    pubKey: "",
   });
+
+  if (!user || !user.addr) {
+    return (
+      <div className="update-profile">
+        <h2> Please Sign In to Update Your Profile </h2>
+      </div>
+    );
+  } else {
+    formData.pubKey = user.addr;
+  }
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;

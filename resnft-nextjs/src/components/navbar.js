@@ -43,9 +43,6 @@ function Navbar() {
                 </Link>
                 <Link href="/users/update-profile">Update Profile</Link>
                 <Link href="/mint">Mint NFT</Link>
-                <Link href={`/restaurants/${encodeURIComponent(user.addr)}`}>
-                  Get NFT
-                </Link>
               </>
             ) : (
               ""
