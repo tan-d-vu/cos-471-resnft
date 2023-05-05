@@ -7,10 +7,10 @@ const RestaurantCreateManyReservations = () => {
 
   const [formData, setFormData] = useState({
     period: "1 day",
-    openingTime: "12:00",
+    openingTime: "18:00",
     closingTime: "20:00",
-    reservationDuration: "30",
-    numTables: "20",
+    reservationDuration: "45",
+    numTables: "10",
     miscInfo: "xdfsdajkdsfauiuiweqr",
     pubKey: "",
   });
