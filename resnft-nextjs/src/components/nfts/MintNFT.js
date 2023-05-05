@@ -1,7 +1,7 @@
 import React from "react";
 import react, { useState, useEffect } from "react";
 import * as fcl from "@onflow/fcl";
-import { mint } from "../cadence/transactions/mint.js";
+import { mint } from "../../cadence/transactions/mint.js";
 
 const MintNFT = () => {
   const [mintBond, setMintBond] = useState(0);

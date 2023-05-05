@@ -1,5 +1,5 @@
 import React from "react";
-import MintNFT from "../components/MintNFT.js";
+import MintNFT from "../components/nfts/MintNFT.js";
 
 const Mint = () => {
   return (

@@ -6,15 +6,35 @@ import Link from "next/link";
 function Navbar() {
   const { user, setUser } = useAuthContext();
 
-  const login = () => {
+  const handleLogin = async () => {
     fcl.authenticate();
     fcl.currentUser().subscribe(setUser);
+    fcl.currentUser().subscribe((user) => setupUserProfile(user));
+  };
+
+  const setupUserProfile = async (user) => {
+    // await prisma.user.create({
+    //   data: {
+    //     name: 'Alice',
+    //     email: 'alice@prisma.io',
+    //     posts: {
+    //       create: { title: 'Hello World' },
+    //     },
+    //     profile: {
+    //       create: { bio: 'I like turtles' },
+    //     },
+    //   },
+    // })
+    console.log(user)
   };
 
   const logout = () => {
     fcl.unauthenticate();
     setUser(null);
   };
+
+
+
 
   return (
     <div className="nav">
@@ -36,12 +56,13 @@ function Navbar() {
           </button>
           <div className="dropdown-content">
             <Link href="/">Home</Link>
-            <Link href="/mint">Mint NFT</Link>
-
             {user && user.addr ? (
-              <Link href={`/restaurants/${encodeURIComponent(user.addr)}`}>
-                Get NFT
-              </Link>
+              <>
+                <Link href="/mint">Mint NFT</Link>
+                <Link href={`/restaurants/${encodeURIComponent(user.addr)}`}>
+                  Get NFT
+                </Link>
+              </>
             ) : (
               ""
             )}
@@ -51,7 +72,7 @@ function Navbar() {
         </div>
         <div className="Nav-Btns">
           {!user || !user.addr ? (
-            <button onClick={login} className="Nav-Button">
+            <button onClick={handleLogin} className="Nav-Button">
               <h2>Login</h2>
             </button>
           ) : (

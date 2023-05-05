@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import * as fcl from "@onflow/fcl";
-import { getData } from "../cadence/scripts/getData.js";
+import { getData } from "../../cadence/scripts/getData.js";
 
 // Placeholder rn. Not actually getting NFTs by ID
-const GetNFTByOwner = ({ addr }) => {
+const GetNFTByID = ({ addr }) => {
   const [myNFT, setMyNFT] = useState();
 
   const GetNFT = async ({ addr }) => {
@@ -20,6 +20,7 @@ const GetNFTByOwner = ({ addr }) => {
   return (
     <div className="App">
       <h1>Get</h1>
+      <input type="text" className="CreateInput" placeholder="Enter ID of NFT" />
       <button onClick={() => GetNFT({ addr })} className="Gen-Button">
         {" "}
         Get NFT{" "}
@@ -38,4 +39,4 @@ const GetNFTByOwner = ({ addr }) => {
   );
 };
 
-export default GetNFTByOwner;
+export default GetNFTByID;
