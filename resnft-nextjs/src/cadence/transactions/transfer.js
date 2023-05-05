@@ -1,5 +1,5 @@
 export const transfer = `
-import RestNFT from 0xee1b2deaf8067e95
+import RestNFT from 0x18bdaac138c4e23f
 
 // This transaction transfers an NFT from one user's collection
 // to another user's collection.

@@ -1,6 +1,6 @@
 export const mint = `
 
-import RestNFT from 0xee1b2deaf8067e95
+import RestNFT from 0x18bdaac138c4e23f
 
 // This transaction allows the Minter account to mint an NFT
 // and deposit it into its collection.

@@ -1,8 +1,7 @@
 export const getData = `
 
-import RestNFT from 0xee1b2deaf8067e95
+import RestNFT from 0x18bdaac138c4e23f
 
-// Print the NFTs owned by account 0x01.
 pub fun main(accountAddress: Address): [{String: String}] {
     let nftOwner = getAccount(accountAddress)
 
