@@ -20,7 +20,7 @@ model Reservation {
 model User {
   pubKey       String        @id @unique
   isRestaurant Boolean
-  name         String
+  name         String 
   email        String?       @unique
   phone        String?       @unique
   location     String?

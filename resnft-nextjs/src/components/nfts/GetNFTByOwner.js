@@ -4,36 +4,33 @@ import { getData } from "../../cadence/scripts/getData.js";
 
 // Placeholder rn. Not actually getting NFTs by ID
 const GetNFTByOwner = ({ addr }) => {
-  const [myNFT, setMyNFT] = useState();
+  const [nfts, setNfts] = useState(null);
 
-  const GetNFT = async ({ addr }) => {
-    const response = await fcl.send([
-      fcl.script(getData),
-      fcl.args([fcl.arg(addr, fcl.t.Address)]),
-    ]);
-    const data = await fcl.decode(response);
-    setMyNFT(data);
-    console.log(data);
-    console.log(myNFT);
-  };
+  useEffect(() => {
+    const fetchNFT = async ({ addr }) => {
+      const response = await fcl.send([
+        fcl.script(getData),
+        fcl.args([fcl.arg(addr, fcl.t.Address)]),
+      ]);
+      const data = await fcl.decode(response);
+      setNfts(data);
+    };
+    if (addr) {
+      fetchNFT({ addr });
+    }
+  }, [addr]);
 
   return (
-    <div className="App">
-      <h1>Get</h1>
-      <button onClick={() => GetNFT({ addr })} className="Gen-Button">
-        {" "}
-        Get NFT{" "}
-      </button>
-
-      {myNFT
-        ? myNFT.map((nft, index) => (
+    <div>
+      {nfts
+        ? nfts.map((nft, index) => (
             <div key={index}>
               <img src={nft.Data} />
             </div>
           ))
         : ""}
 
-      {myNFT ? myNFT.length : 0}
+      {nfts ? nfts.length : 0}
     </div>
   );
 };
