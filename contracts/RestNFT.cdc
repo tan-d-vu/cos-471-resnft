@@ -1,4 +1,4 @@
- // ExampleNFT.cdc
+// ExampleNFT.cdc
 //
 // This is a complete version of the ExampleNFT contract
 // that includes withdraw and deposit functionality, as well as a
@@ -63,6 +63,8 @@ pub contract RestNFT {
         pub fun idExists(id: UInt64): Bool
 
         pub fun getAllData(): [{String:String}]
+
+        pub fun getData(key: UInt64): {String: String}
     }
 
     // The definition of the Collection resource that
@@ -110,15 +112,23 @@ pub contract RestNFT {
             return self.ownedNFTs.keys
         }
 
-        pub fun getAllData(): [{String: String}] {
-            var array: [{String: String}] = []
-            for key in self.ownedNFTs.keys {
-                let token <- self.ownedNFTs.remove(key: key)
-                ?? panic("Cannot withdraw the specified NFT ID")
-                array.append(token.getData())
-                self.ownedNFTs[key] <-! token
+        pub fun getAll(): [{String: String}] {
+            var result: [{String: String}] = []
+            let tokenIDs = self.ownerCollection.getIDs()
+            
+            for tokenID in tokenIDs {
+                let tokenData = self.ownerCollection.getData(key: tokenID)
+                result.append(tokenData)
             }
-            return array
+            return result
+        }
+
+        pub fun getData(key: UInt64): {String: String} {
+            let token <- self.ownedNFTs.remove(key: key)
+            ?? panic("Cannot withdraw the specified NFT ID")
+            let output = token.getData()
+            self.ownedNFTs[key] <-! token
+            return output
         }
 
         destroy() {
@@ -146,6 +156,36 @@ pub contract RestNFT {
         self.idCount = self.idCount + 1
 
         return <-newNFT
+    }
+
+    pub resource NFTMinter {
+
+        // the ID that is used to mint NFTs
+        // it is only incremented so that NFT ids remain
+        // unique. It also keeps track of the total number of NFTs
+        // in existence
+        pub var idCount: UInt64
+
+        init() {
+            self.idCount = 1
+        }
+
+        // mintNFT 
+        //
+        // Function that mints a new NFT with a new ID
+        // and returns it to the caller
+        pub fun mintNFT(mintData: String, mintCreator: Address, bond: UInt64, mintRoyalties: UFix64, 
+        mintName: String): @NFT {
+
+            // create a new NFT
+            var newNFT <- create NFT(initID: self.idCount, initData: mintData, initBond: bond, 
+            initCreator: mintCreator, initRoyalties: mintRoyalties, initName: mintName)
+
+            // change the id so that each ID is unique
+            self.idCount = self.idCount + 1
+            
+            return <-newNFT
+        }
     }
 
 	init() {
