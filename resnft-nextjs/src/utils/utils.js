@@ -6,9 +6,13 @@ export const fetchProfile = ({ addr }) => {
     },
     body: JSON.stringify({ addr: addr }),
   })
-    .then((res) => res.json())
-    .then((data) => {
-      return data;
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("HTTP error " + response.status);
+      }
+      return response.json();
     })
-    .catch((error) => console.error(error));
+    .catch((error) => {
+      console.log(error);
+    });
 };

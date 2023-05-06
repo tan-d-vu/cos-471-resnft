@@ -3,6 +3,7 @@ import { useAuthContext, useProfileContext } from "@/contexts/AuthContext";
 import * as fcl from "@onflow/fcl";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { fetchProfile } from "@/utils/utils";
 
 function Navbar() {
   const { user, setUser } = useAuthContext();
@@ -13,33 +14,18 @@ function Navbar() {
   const handleLogin = () => {
     fcl.authenticate();
     fcl.currentUser().subscribe(setUser);
-    updateProfile();
-    router.push("/users/update-profile");
   };
 
   useEffect(() => {
-    updateProfile();
-  }, [user]);
-
-  const updateProfile = () => {
-    const doUpdate = () => {
-      fetch("/api/users/get-profile", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ addr: user.addr }),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          setProfile(data);
-        });
-    };
-
     if (!(!user || !user.addr)) {
-      doUpdate();
+      fetchProfile({ addr: user.addr }).then((data) => {
+        if (data) {
+          setProfile(data.user);
+        }
+      });
+      router.push(`/users/${encodeURIComponent(user.addr)}`);
     }
-  };
+  }, [user]);
 
   const logout = () => {
     fcl.unauthenticate();
@@ -95,17 +81,35 @@ function Navbar() {
         </div>
         <div className="Nav-Btns">
           {!user || !user.addr ? (
-            <button onClick={handleLogin} className="Nav-Button">
-              <h2>Login</h2>
-            </button>
+            <>
+              <button onClick={handleLogin} className="Nav-Button">
+                <h2>Login</h2>
+              </button>
+            </>
           ) : (
             ""
           )}
 
           {user && user.addr ? (
-            <button onClick={logout} className="Nav-Button">
-              <h2>Logout</h2>
-            </button>
+            <>
+              <button className="Nav-Button">
+                <h2>
+                  <Link href={`/users/${encodeURIComponent(user.addr)}`}>
+                    Profile
+                  </Link>
+                </h2>
+              </button>
+
+              <button className="Nav-Button">
+                <h2>
+                  <Link href="/users/update-profile">Update Profile</Link>
+                </h2>
+              </button>
+
+              <button onClick={logout} className="Nav-Button">
+                <h2>Logout</h2>
+              </button>
+            </>
           ) : (
             ""
           )}

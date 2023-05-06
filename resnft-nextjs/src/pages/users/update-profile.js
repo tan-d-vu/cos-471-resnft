@@ -9,7 +9,6 @@ const UpdateProfile = () => {
   const { profile, setProfile } = useProfileContext();
   const router = useRouter();
 
-
   console.log(profile);
 
   const [formData, setFormData] = useState({
@@ -22,6 +21,17 @@ const UpdateProfile = () => {
     description: "",
     pubKey: "",
   });
+
+  if (profile) {
+    formData.userType = profile.isRestaurant ? "restaurant" : "customer";
+    formData.name = profile.name;
+    formData.email = profile.email;
+    formData.phone = profile.phone;
+    formData.location = profile.location;
+    formData.menu = profile.menu;
+    formData.description = profile.description;
+    formData.pubKey = profile.pubKey;
+  }
 
   if (!user || !user.addr) {
     return (
@@ -51,13 +61,14 @@ const UpdateProfile = () => {
       },
     })
       .then((res) => res.json())
-      .then((data) => console.log(data))
+      .then((data) => {
+        setProfile(data.user);
+      })
       .catch((error) => console.error(error));
 
     router.push(`/users/${encodeURIComponent(user.addr)}`);
   };
-  
-  
+
   fcl.currentUser().authorization;
 
   const setupAccount = async () => {

@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import GetNFTByOwner from "../../components/nfts/GetNFTByOwner";
 import { useRouter } from "next/router";
-import { useAuthContext, useProfileContext } from "@/contexts/AuthContext";
 import { fetchProfile } from "@/utils/utils";
+import Link from "next/link";
 
 const UserProfile = () => {
   const router = useRouter();
@@ -13,16 +13,23 @@ const UserProfile = () => {
   useEffect(() => {
     if (publickey) {
       fetchProfile({ addr: publickey }).then((data) => {
-        setProfile(data.user);
+        if (data) {
+          setProfile(data.user);
+        }
       });
     }
   }, [publickey]);
 
   if (!profile) {
-    return <div> Loading... </div>;
+    return (
+      <div>
+        Profile Not Found
+        <br />
+        If you haven't created your profile, click{" "}
+        <Link href="/users/update-profile">here</Link> to create it.
+      </div>
+    );
   }
-
-  console.log(profile);
 
   return (
     <div className="user-profile">
