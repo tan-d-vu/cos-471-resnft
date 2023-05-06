@@ -2,6 +2,7 @@ import "@/styles/globals.css";
 import Layout from "@/layout/Layout";
 import * as fcl from "@onflow/fcl";
 import { AuthWrapper } from "@/contexts/AuthContext";
+import { ProfileWrapper } from "@/contexts/AuthContext";
 
 fcl
   .config()
@@ -13,9 +14,11 @@ fcl
 export default function App({ Component, pageProps }) {
   return (
     <AuthWrapper>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <ProfileWrapper>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </ProfileWrapper>
     </AuthWrapper>
   );
 }

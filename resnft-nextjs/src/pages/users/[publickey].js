@@ -1,50 +1,42 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import GetNFTByOwner from "../../components/nfts/GetNFTByOwner";
-import prisma from "../../../prisma/lib/prisma";
-import { useAuthContext } from "@/contexts/AuthContext";
-import Link from "next/link";
-const UserProfile = ({ profileData }) => {
-  const { user, _ } = useAuthContext();
+import { useRouter } from "next/router";
+import { useAuthContext, useProfileContext } from "@/contexts/AuthContext";
+import { fetchProfile } from "@/utils/utils";
 
-  if (!profileData) {
-    if (!user || !user.addr) {
-      return <div> Sign-in if this is your public key </div>;
-    } else {
-      return (
-        <div>
-          Profile not created.
-          <Link href="/users/update-profile"> Create Profile </Link>
-        </div>
-      );
+const UserProfile = () => {
+  const router = useRouter();
+  const { publickey } = router.query;
+
+  const [profile, setProfile] = useState(null);
+
+  useEffect(() => {
+    if (publickey) {
+      fetchProfile({ addr: publickey }).then((data) => {
+        setProfile(data.user);
+      });
     }
+  }, [publickey]);
+
+  if (!profile) {
+    return <div> Loading... </div>;
   }
+
+  console.log(profile);
 
   return (
     <div className="user-profile">
-      <h1> {profileData.pubKey} </h1>
-      <h1> {profileData.name} </h1>
-      <h2> {profileData.email} </h2>
-      <h3> {profileData.phone} </h3>
-      <h4> {profileData.location} </h4>
-      <h5> {profileData.menu} </h5>
-      <h6> {profileData.description} </h6>
-      <GetNFTByOwner addr={profileData.pubKey} />
+      <h1> Pubkey: {profile.pubKey} </h1>
+      <h1> Name: {profile.name} </h1>
+      <h1> Email: {profile.email} </h1>
+      <h1> Phone {profile.phone} </h1>
+      <h1> Loc: {profile.location} </h1>
+      <h1> Menu {profile.menu} </h1>
+      <h1> Desc: {profile.description} </h1>
+      <h1> NFTs: </h1>
+      <GetNFTByOwner addr={profile.pubKey} />
     </div>
   );
 };
 
 export default UserProfile;
-
-export async function getServerSideProps(context) {
-  const publickey = context.params.publickey;
-
-  const user = await prisma.user.findUnique({
-    where: {
-      pubKey: publickey,
-    },
-  });
-
-  return {
-    props: { profileData: user },
-  };
-}

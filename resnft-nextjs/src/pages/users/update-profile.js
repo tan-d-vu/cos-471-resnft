@@ -1,11 +1,16 @@
 import React from "react";
 import { useState } from "react";
-import { useAuthContext } from "@/contexts/AuthContext";
+import { useAuthContext, useProfileContext } from "@/contexts/AuthContext";
 import { useRouter } from "next/router";
+import * as fcl from "@onflow/fcl";
 
 const UpdateProfile = () => {
   const { user, _ } = useAuthContext();
+  const { profile, setProfile } = useProfileContext();
   const router = useRouter();
+
+
+  console.log(profile);
 
   const [formData, setFormData] = useState({
     userType: "customer",
@@ -50,6 +55,23 @@ const UpdateProfile = () => {
       .catch((error) => console.error(error));
 
     router.push(`/users/${encodeURIComponent(user.addr)}`);
+  };
+  
+  
+  fcl.currentUser().authorization;
+
+  const setupAccount = async () => {
+    const transactionID = await fcl
+      .send([
+        fcl.transaction(setup),
+        fcl.args(),
+        fcl.payer(fcl.authz),
+        fcl.proposer(fcl.authz),
+        fcl.authorizations([fcl.authz]),
+        fcl.limit(9999),
+      ])
+      .then(fcl.decode);
+    console.log(transactionID);
   };
 
   return (

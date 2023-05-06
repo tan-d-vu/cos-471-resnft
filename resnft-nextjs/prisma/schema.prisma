@@ -26,6 +26,7 @@ model User {
   location     String?
   menu         String?
   phone        String?       @unique
+  isSetup      Boolean       @default(false)
   reservations Reservation[]
 
   @@map("users")

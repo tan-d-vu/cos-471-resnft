@@ -1,24 +1,50 @@
-import React from "react";
-import { useAuthContext } from "@/contexts/AuthContext";
+import React, { useEffect } from "react";
+import { useAuthContext, useProfileContext } from "@/contexts/AuthContext";
 import * as fcl from "@onflow/fcl";
 import Link from "next/link";
-import { useRouter } from 'next/router';
-
+import { useRouter } from "next/router";
 
 function Navbar() {
   const { user, setUser } = useAuthContext();
+  const { profile, setProfile } = useProfileContext();
 
   const router = useRouter();
 
-  const handleLogin = async () => {
+  const handleLogin = () => {
     fcl.authenticate();
     fcl.currentUser().subscribe(setUser);
+    updateProfile();
     router.push("/users/update-profile");
+  };
+
+  useEffect(() => {
+    updateProfile();
+  }, [user]);
+
+  const updateProfile = () => {
+    const doUpdate = () => {
+      fetch("/api/users/get-profile", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ addr: user.addr }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setProfile(data);
+        });
+    };
+
+    if (!(!user || !user.addr)) {
+      doUpdate();
+    }
   };
 
   const logout = () => {
     fcl.unauthenticate();
     setUser(null);
+    setProfile(null);
     router.push("/");
   };
 
@@ -49,6 +75,16 @@ function Navbar() {
                 </Link>
                 <Link href="/users/update-profile">Update Profile</Link>
                 <Link href="/mint">Mint NFT</Link>
+                <Link href="/restaurants/populate-reservations">
+                  Populate Reservations
+                </Link>
+                <Link
+                  href={`/restaurants/allReservations/${encodeURIComponent(
+                    user.addr
+                  )}`}
+                >
+                  Reservations
+                </Link>
               </>
             ) : (
               ""
