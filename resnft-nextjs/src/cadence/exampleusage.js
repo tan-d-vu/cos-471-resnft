@@ -9,6 +9,7 @@ import { getFlowBalance } from "./cadence/scripts/getFlowBalance.js";
 import { createSale } from "./cadence/transactions/CreateSale.js";
 import { purchase } from "./cadence/transactions/Purchase.js";
 import { getSaleData } from "./cadence/scripts/getSaleIDs.js";
+import { multimint } from "./cadence/transactions/multimint.js";
 
 fcl
   .config()
@@ -34,6 +35,34 @@ function App() {
   const [buyPrice, setBuyPrice] = useState(0);
   const [buyaddr, setBuyaddr] = useState("");
   const [salequeryaddr, setSalequeryaddr] = useState("");
+
+  const payload = {
+    mintDatas: ["https://assets.pokemon.com/assets/cms2/img/pokedex/full/133.png", "https://assets.pokemon.com/assets/cms2/img/pokedex/full/197.png"],
+    mintBonds:  [10, 20],
+    mintRoyalties:  [0.1, 0.2],
+    mintNames: ["Eevee", "Umbreon"]
+  };
+
+  const multiplemint = async () => {
+    const transactionID = await fcl
+      .send([
+        fcl.transaction(multimint),
+        fcl.args([
+          fcl.arg(payload.mintDatas, fcl.t.Array(fcl.t.String)),
+          fcl.arg(payload.mintBonds, fcl.t.Array(fcl.t.UInt64)),
+          fcl.arg(payload.mintRoyalties, fcl.t.Array(fcl.t.UFix64)),
+          fcl.arg(payload.mintNames, fcl.t.Array(fcl.t.String)),
+        ]),
+        fcl.proposer(fcl.authz),
+        fcl.payer(fcl.authz),
+        fcl.authorizations([fcl.authz]),
+        fcl.limit(9999)
+      ])
+      .then(fcl.decode);
+
+    console.log(transactionID);
+  };
+
 
   const login = () => {
     fcl.authenticate();
@@ -200,6 +229,8 @@ function App() {
 
       <br />
       <button onClick={() => mintNFT()}> Create NFT </button>
+      <p> ----------------------</p>
+      <button onClick={() => multiplemint()}> Create Multiple NFT </button>
       <p> ----------------------</p>
 
       <input type="text" placeholder="Enter NFT ID to Sell" value={saleNFTid} onChange={(e) => setSaleNFTid(e.target.value)} />
