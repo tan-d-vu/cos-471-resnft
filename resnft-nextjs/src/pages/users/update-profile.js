@@ -22,17 +22,6 @@ const UpdateProfile = () => {
     pubKey: "",
   });
 
-  if (profile) {
-    formData.userType = profile.isRestaurant ? "restaurant" : "customer";
-    formData.name = profile.name;
-    formData.email = profile.email;
-    formData.phone = profile.phone;
-    formData.location = profile.location;
-    formData.menu = profile.menu;
-    formData.description = profile.description;
-    formData.pubKey = profile.pubKey;
-  }
-
   if (!user || !user.addr) {
     return (
       <div className="update-profile">
@@ -67,22 +56,6 @@ const UpdateProfile = () => {
       .catch((error) => console.error(error));
 
     router.push(`/users/${encodeURIComponent(user.addr)}`);
-  };
-
-  fcl.currentUser().authorization;
-
-  const setupAccount = async () => {
-    const transactionID = await fcl
-      .send([
-        fcl.transaction(setup),
-        fcl.args(),
-        fcl.payer(fcl.authz),
-        fcl.proposer(fcl.authz),
-        fcl.authorizations([fcl.authz]),
-        fcl.limit(9999),
-      ])
-      .then(fcl.decode);
-    console.log(transactionID);
   };
 
   return (
