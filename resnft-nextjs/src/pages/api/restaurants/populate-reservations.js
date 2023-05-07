@@ -114,7 +114,7 @@ export default async function handler(req, res) {
   // Create reservations data
   const reservations = createReservations(req.body);
 
-  // Populate
+  // Populate in database
   const user = await prisma.user.update({
     where: {
       pubKey: req.body.pubKey,
@@ -127,6 +127,6 @@ export default async function handler(req, res) {
       },
     },
   });
-
+  
   return res.status(200).json({ message: "Reservations created." });
 }

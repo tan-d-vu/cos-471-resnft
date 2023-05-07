@@ -1,8 +1,10 @@
 // Populating the database with available reservation times
 import { useState } from "react";
 import { useAuthContext } from "../../contexts/AuthContext";
+import { useRouter } from "next/router";
 
 const RestaurantCreateManyReservations = () => {
+  const router = useRouter();
   const { user, _ } = useAuthContext();
 
   const [formData, setFormData] = useState({
@@ -45,6 +47,12 @@ const RestaurantCreateManyReservations = () => {
         .then((data) => console.log(data))
         .catch((error) => console.error(error));
     }
+
+    setTimeout(() => {
+      router.push(
+        `/restaurants/allReservations/${encodeURIComponent(user.addr)}`
+      );
+    }, 2000); // wait for db to populate lol...
   };
 
   return (
@@ -52,7 +60,11 @@ const RestaurantCreateManyReservations = () => {
       <form onSubmit={handleSubmit}>
         <label>
           Period:
-          <select name="period" value={formData.period} onChange={handleInputChange}>
+          <select
+            name="period"
+            value={formData.period}
+            onChange={handleInputChange}
+          >
             <option value="1 day">1 day</option>
             <option value="7 days">7 days</option>
           </select>
@@ -129,3 +141,10 @@ const RestaurantCreateManyReservations = () => {
 };
 
 export default RestaurantCreateManyReservations;
+
+
+// TODO:
+// After creating in db, redirect to /restaurants/allReservations/[pubKey]
+// and display the reservations
+// Create new NFTs for each reservation from this page?
+// How?
