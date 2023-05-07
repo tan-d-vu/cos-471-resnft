@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
-const Index = () => {
+const Landing = () => {
   return (
     <div className="Landing-wrapper">
       <div>
@@ -11,11 +11,11 @@ const Index = () => {
         <img src="../Plate.png" className="Landing-plate"/>
         <p>Where reservations become collectable</p>
         <button className="Landing-Button">
-          <Link href="/home">ENTER</Link>
+          <Link href="/">ENTER</Link>
         </button>
       </div>
     </div>
   );
 };
 
-export default Index;
+export default Landing;

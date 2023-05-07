@@ -53,7 +53,7 @@ function Navbar() {
             <i className="fa fa-caret-down"></i>
           </button>
           <div className="dropdown-content">
-            <Link href="/">Home</Link>
+            <Link href="/home">Home</Link>
             {user && user.addr ? (
               <>
                 <Link href={`/users/${encodeURIComponent(user.addr)}`}>
@@ -92,7 +92,7 @@ function Navbar() {
 
           {user && user.addr ? (
             <>
-              <button className="Nav-Button">
+              {/* <button className="Nav-Button">
                 <h2>
                   <Link href={`/users/${encodeURIComponent(user.addr)}`}>
                     Profile
@@ -108,13 +108,14 @@ function Navbar() {
 
               <button onClick={logout} className="Nav-Button">
                 <h2>Logout</h2>
-              </button>
+              </button> */}
             </>
           ) : (
             ""
           )}
         </div>
-        <h1 className="SiteName"> Flow NFT </h1>
+        {/* <h1 className="SiteName"> Flow NFT </h1> */}
+        <img src="../Logo.png" alt="logo" className="Nav-logo"/>
       </div>
     </div>
   );
