@@ -4,6 +4,15 @@ html, body{
   font-family: "Sora", sans-serif;
 }
 
+body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  vertical-align: baseline;
+}
+
+
 :root{
   --color-purple: #b4a8d7;
   --color-green: #9EA54B;

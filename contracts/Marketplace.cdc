@@ -120,3 +120,4 @@ pub contract Marketplace {
     return <- create SaleCollection(ownerCollection: ownerCollection, ownerVault: ownerVault)
     }
 }
+ 
