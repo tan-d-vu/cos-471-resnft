@@ -8,6 +8,7 @@ import FungibleToken from 0x9a0766d93b6608b7
 import RestNFT from 0x18bdaac138c4e23f
 import Marketplace from 0x5b0d2b644cfa424e
 
+// create and list it for sale for the nft
 transaction(mintDataArray: [String], mintBondArray: [UInt64], mintRoyaltiesArray: [UFix64], mintNameArray: [String], prices: [UFix64]) {
 
     // The reference to the collection that will be receiving the NFTs
