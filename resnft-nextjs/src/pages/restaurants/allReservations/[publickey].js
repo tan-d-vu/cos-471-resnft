@@ -2,15 +2,9 @@ import prisma from "../../../../prisma/lib/prisma";
 import { useAuthContext } from "@/contexts/AuthContext";
 
 const UserProfile = ({ reservations }) => {
-	console.log(reservations);
+  console.log(reservations);
 
-
-
-  return (
-    <div className="user-profile">
-afsdfasd
-    </div>
-  );
+  return <div className="user-profile">afsdfasd</div>;
 };
 
 export default UserProfile;
