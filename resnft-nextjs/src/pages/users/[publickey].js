@@ -34,16 +34,16 @@ const UserProfile = () => {
 
   return (
     <div className="user-profile">
-      <div className="Description">
-        <h1> Pubkey: {profile.pubKey} </h1>
-        <h1> Name: {profile.name} </h1>
-        <h1> Email: {profile.email} </h1>
-        <h1> Phone {profile.phone} </h1>
-        <h1> Loc: {profile.location} </h1>
-        <h1> Menu {profile.menu} </h1>
-        <h1> Desc: {profile.description} </h1>
-        <h1> NFTs: </h1>
-        <GetNFTByOwner addr={profile.pubKey} />
+      <div className="Update-description">
+        <h1>Your Profile</h1>
+        <h2> Pubkey: {profile.pubKey} </h2>
+        <h2> Name: {profile.name} </h2>
+        <h2> Email: {profile.email} </h2>
+        <h2> Phone: {profile.phone} </h2>
+        <h2> Loc: {profile.location} </h2>
+        <h2> Menu: {profile.menu} </h2>
+        <h2> Description: {profile.description} </h2>
+        <h2> NFTs: <GetNFTByOwner addr={profile.pubKey} /> </h2>
       </div>
     </div>
   );
