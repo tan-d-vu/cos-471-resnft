@@ -47,13 +47,13 @@ function Index() {
             </div>
           </div>
           {/* <h2> Current Address : {user.addr} </h2> */}
-          {/* <p> ----------------------</p>
+          <p> ----------------------</p>
                 <button onClick={() => setupAccount()} className="Gen-Button">
                     {" "}
                     Setup{" "}
                 </button>
                 <p> ----------------------</p>
-                <MintNFT />
+                {/* <MintNFT />
                 <p> ----------------------</p>
                 <GetNFTByOwner addr={user.addr} />
                 <p> ----------------------</p> */}

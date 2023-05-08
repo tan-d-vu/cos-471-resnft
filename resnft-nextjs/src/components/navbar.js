@@ -54,6 +54,8 @@ function Navbar() {
           </button>
           <div className="dropdown-content">
             <Link href="/home">Home</Link>
+            <Link href="/restaurants/list-all">Discover Restaurants</Link>
+
             {user && user.addr ? (
               <>
                 <Link href={`/users/${encodeURIComponent(user.addr)}`}>

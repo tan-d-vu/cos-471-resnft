@@ -1,5 +1,4 @@
 import { createandsale } from "@/cadence/transactions/createandsale";
-import { multimint } from "@/cadence/transactions/multimint";
 import { useEffect, useState } from "react";
 import { useAuthContext, useProfileContext } from "../../contexts/AuthContext";
 import { useRouter } from "next/router";
@@ -52,13 +51,13 @@ const NFTsFromReservations = () => {
   const mintAndCreateSale = async () => {
     await fcl
       .send([
-        fcl.transaction(multimint),
+        fcl.transaction(createandsale),
         fcl.args([
           fcl.arg(mintDataArray, fcl.t.Array(fcl.t.String)),
           fcl.arg(mintBondArray, fcl.t.Array(fcl.t.UInt64)),
           fcl.arg(mintRoyaltiesArray, fcl.t.Array(fcl.t.UFix64)),
           fcl.arg(mintNameArray, fcl.t.Array(fcl.t.String)),
-          // fcl.arg(mintBondArray, fcl.t.Array(fcl.t.UFix64)),
+          fcl.arg(priceArray, fcl.t.Array(fcl.t.UFix64)),
         ]),
         fcl.payer(authz),
         fcl.proposer(authz),
@@ -68,6 +67,7 @@ const NFTsFromReservations = () => {
       .then(fcl.decode)
       .then((res) => {
         console.log(res);
+        setReservationsCreated([]);
       })
       .then(() => {
         router.push(`/restaurants/allReservations/${encodeURIComponent(user.addr)}`);

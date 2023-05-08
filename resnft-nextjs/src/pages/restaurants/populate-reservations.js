@@ -154,8 +154,3 @@ const RestaurantCreateManyReservations = () => {
 
 export default RestaurantCreateManyReservations;
 
-// TODO:
-// After creating in db, redirect to /restaurants/allReservations/[pubKey]
-// and display the reservations
-// Create new NFTs for each reservation from this page?
-// How?

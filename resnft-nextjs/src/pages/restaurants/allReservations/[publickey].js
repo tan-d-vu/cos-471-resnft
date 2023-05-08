@@ -23,10 +23,15 @@ const ReservationModal = ({ reservation }) => {
         contentLabel="Reservation Modal"
       >
         {reservation.datetime}
+        <br />
+        {reservation.nft}
+
 
         <button onClick={handleClose}>close</button>
         <Link
-          href={`/restaurants/reservations/${encodeURIComponent(reservation.id)}`}
+          href={`/restaurants/reservations/${encodeURIComponent(
+            reservation.id
+          )}`}
         >
           Book
         </Link>

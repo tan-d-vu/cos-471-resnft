@@ -10,9 +10,6 @@ export default async function handler(req, res) {
   const reservationNFTList = req.body.nfts;
   const pubKey = req.body.addr;
 
-  console.log(reservationNFTList);
-  console.log(pubKey);
-
   for (let nft of reservationNFTList) {
     const reservationID = nft.Name;
     const nftID = nft.ID;
