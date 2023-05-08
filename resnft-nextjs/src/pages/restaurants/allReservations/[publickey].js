@@ -1,8 +1,39 @@
 import prisma from "../../../../prisma/lib/prisma";
 import React, { useState } from "react";
 import { DateTime } from "luxon";
+import Modal from "react-modal";
+import Link from "next/link";
 
-import { useAuthContext } from "@/contexts/AuthContext";
+const ReservationModal = ({ reservation }) => {
+  const [showModal, setShowModal] = useState(false);
+
+  const handleClose = () => setShowModal(false);
+  const handleShow = () => setShowModal(true);
+
+  return (
+    <div>
+      <button onClick={handleShow}>
+        {DateTime.fromISO(reservation.datetime).toLocaleString(
+          DateTime.TIME_SIMPLE
+        )}
+      </button>
+      <Modal
+        isOpen={showModal}
+        onRequestClose={handleClose}
+        contentLabel="Reservation Modal"
+      >
+        {reservation.datetime}
+
+        <button onClick={handleClose}>close</button>
+        <Link
+          href={`/restaurants/reservations/${encodeURIComponent(reservation.id)}`}
+        >
+          Book
+        </Link>
+      </Modal>
+    </div>
+  );
+};
 
 const UserProfile = ({ reservations }) => {
   const [searchDate, setSearchDate] = useState("");
@@ -34,10 +65,6 @@ const UserProfile = ({ reservations }) => {
     setAvailableTimeSlots(availableSlots);
   };
 
-  const handleSlotClick = (time) => {
-    console.log(time);
-  };
-
   return (
     <div>
       <h1>Reservation List</h1>
@@ -46,6 +73,7 @@ const UserProfile = ({ reservations }) => {
         <input
           type="date"
           id="date"
+          min={DateTime.now().toISODate()}
           value={searchDate}
           onChange={handleDateChange}
         />
@@ -61,16 +89,11 @@ const UserProfile = ({ reservations }) => {
 
       <h2>Available Time Slots:</h2>
       {availableTimeSlots.length > 0 ? (
-        <ul>
+        <>
           {availableTimeSlots.map((reservation) => (
-            <li
-              key={reservation.id}
-              onClick={() => handleSlotClick(reservation.datetime)}
-            >
-              {reservation.datetime}
-            </li>
+            <ReservationModal reservation={reservation} />
           ))}
-        </ul>
+        </>
       ) : (
         <p>No available time slots for selected date and time.</p>
       )}
