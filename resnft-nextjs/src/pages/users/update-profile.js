@@ -68,6 +68,7 @@ const UpdateProfile = () => {
               name="userType"
               value={formData.userType}
               onChange={handleInputChange}
+              className="Select-option"
             >
               <option value="customer">Customer</option>
               <option value="restaurant">Restaurant</option>

@@ -4,7 +4,9 @@ import MintNFT from "../components/nfts/MintNFT.js";
 const Mint = () => {
   return (
     <div className="mint">
-      <MintNFT />
+      <div className="Description">
+        <MintNFT />
+      </div>
     </div>
   );
 };
