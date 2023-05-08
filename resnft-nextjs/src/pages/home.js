@@ -8,21 +8,6 @@ import Link from "next/link";
 
 function Index() {
   const { user, _ } = useAuthContext();
-
-  const setupAccount = async () => {
-    const transactionID = await fcl
-      .send([
-        fcl.transaction(setup),
-        fcl.args(),
-        fcl.payer(fcl.authz),
-        fcl.proposer(fcl.authz),
-        fcl.authorizations([fcl.authz]),
-        fcl.limit(9999),
-      ])
-      .then(fcl.decode);
-    console.log(transactionID);
-  };
-
   return (
     <div className="App">
       {user && user.addr ? (
@@ -46,17 +31,6 @@ function Index() {
               </button>
             </div>
           </div>
-          {/* <h2> Current Address : {user.addr} </h2> */}
-          <p> ----------------------</p>
-                <button onClick={() => setupAccount()} className="Gen-Button">
-                    {" "}
-                    Setup{" "}
-                </button>
-                <p> ----------------------</p>
-                {/* <MintNFT />
-                <p> ----------------------</p>
-                <GetNFTByOwner addr={user.addr} />
-                <p> ----------------------</p> */}
         </div>
       ) : (
         <button className="Landing-Button">

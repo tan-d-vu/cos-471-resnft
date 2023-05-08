@@ -3,13 +3,26 @@ import { useState } from "react";
 import { useAuthContext, useProfileContext } from "@/contexts/AuthContext";
 import { useRouter } from "next/router";
 import * as fcl from "@onflow/fcl";
+import { setup } from "../../cadence/transactions/setup.js";
 
 const UpdateProfile = () => {
   const { user, _ } = useAuthContext();
   const { profile, setProfile } = useProfileContext();
   const router = useRouter();
 
-  console.log(profile);
+  const setupAccount = async () => {
+    const transactionID = await fcl
+      .send([
+        fcl.transaction(setup),
+        fcl.args(),
+        fcl.payer(fcl.authz),
+        fcl.proposer(fcl.authz),
+        fcl.authorizations([fcl.authz]),
+        fcl.limit(9999),
+      ])
+      .then(fcl.decode);
+    console.log(transactionID);
+  };
 
   const [formData, setFormData] = useState({
     userType: "customer",
@@ -53,9 +66,12 @@ const UpdateProfile = () => {
       .then((data) => {
         setProfile(data.user);
       })
+      .then(() => {
+        router.push(`/users/${encodeURIComponent(user.addr)}`);
+      })
       .catch((error) => console.error(error));
 
-    router.push(`/users/${encodeURIComponent(user.addr)}`);
+      setupAccount();
   };
 
   return (
@@ -115,7 +131,7 @@ const UpdateProfile = () => {
               onChange={handleInputChange}
             />
           </div>
-          <br/>
+          <br />
           <div>
             <label htmlFor="email">Email:</label>
             <input
@@ -134,7 +150,9 @@ const UpdateProfile = () => {
               onChange={handleInputChange}
             />
           </div>
-          <button type="submit" className="Gen-Button">UPDATE</button>
+          <button type="submit" className="Gen-Button">
+            UPDATE
+          </button>
         </div>
       </form>{" "}
     </div>
