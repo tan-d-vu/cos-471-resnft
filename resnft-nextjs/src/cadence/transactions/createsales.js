@@ -14,17 +14,9 @@ transaction(tokenIDs: [UInt64], prices: [UFix64]) {
 
     prepare(acct: AuthAccount) {
 
-        // Borrow a reference to the stored Vault
-        let receiver = acct.getCapability<&FlowToken.Vault{FlowToken.Receiver}>(/public/flowTokenReceiver)
-
-
-        // borrow a reference to the nftTutorialCollection in storage
-        let collectionCapability = acct.link<&RestNFT.Collection>(/private/nftTutorialCollection, target: RestNFT.CollectionStoragePath)
-          ?? panic("Unable to create private link to NFT Collection")
-
-        // Create a new Sale object,
-        // initializing it with the reference to the owner's vault
-        let sale <- Marketplace.createSaleCollection(ownerCollection: collectionCapability, ownerVault: receiver)
+        // take the sale object out
+        let sale <- acct.load<@Marketplace.SaleCollection>(from: /storage/NFTSale)
+        ?? panic("Could not load Sale Collection object")
 
         var i = 0
 
