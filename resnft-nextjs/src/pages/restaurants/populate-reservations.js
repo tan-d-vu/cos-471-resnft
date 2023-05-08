@@ -69,85 +69,81 @@ const RestaurantCreateManyReservations = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Period:
-          <select
-            name="period"
-            value={formData.period}
-            onChange={handleInputChange}
-          >
-            <option value="1 day">1 day</option>
-            <option value="7 days">7 days</option>
-          </select>
-        </label>
-        <br />
-        <label>
-          Opening Time:
-          <input
-            type="time"
-            name="openingTime"
-            required
-            value={formData.openingTime}
-            onChange={handleInputChange}
-          />
-        </label>
-        <br />
-        <label>
-          Closing Time:
-          <input
-            type="time"
-            name="closingTime"
-            required
-            value={formData.closingTime}
-            onChange={handleInputChange}
-          />
-        </label>
-        <br />
-        <label>
-          Reservation Duration (in minutes):
-          <input
-            type="number"
-            name="reservationDuration"
-            required
-            value={formData.reservationDuration}
-            onChange={handleInputChange}
-          />
-        </label>
-        <br />
-        <label>
-          Number of Tables Available:
-          <input
-            type="number"
-            name="numTables"
-            required
-            value={formData.numTables}
-            onChange={handleInputChange}
-          />
-        </label>
-        <br />
-        <label>
-          Other Information:
-          <textarea
-            name="miscInfo"
-            value={formData.miscInfo}
-            onChange={handleInputChange}
-          />
-        </label>
-        <br />
-        <label>
-          <input
-            type="checkbox"
-            checked={confirm}
-            onChange={(e) => setConfirm(e.target.checked)}
-          />
-          Confirm mass creation of available reservations
-        </label>
-        <br />
-        <button type="submit" disabled={!confirm}>
-          Create Available Reservations
-        </button>
-      </form>
+      <div className="Update-description">
+        <p>Please enter the information on reservations you would like to create below:</p>
+        <form onSubmit={handleSubmit}>
+            <label htmlFor="period">Period (how many days of the week is this reservation?): </label>
+            <select
+              name="period"
+              value={formData.period}
+              onChange={handleInputChange}
+              className="Select-option"
+            >
+              <option value="1 day">1 day</option>
+              <option value="7 days">7 days</option>
+            </select>
+          <br/>
+          <br/>
+            <label htmlFor="openingTime">Opening Time: </label>
+            <input
+              type="time"
+              name="openingTime"
+              required
+              value={formData.openingTime}
+              onChange={handleInputChange}
+            />
+          <br/>
+          <label htmlFor="closingTime">Closing Time: </label>
+            <input
+              type="time"
+              name="closingTime"
+              required
+              value={formData.closingTime}
+              onChange={handleInputChange}
+            />
+
+          <br />
+            <label htmlFor="reservationDuration">Reservation Duration (in minutes): </label>
+            <input
+              type="number"
+              name="reservationDuration"
+              required
+              value={formData.reservationDuration}
+              onChange={handleInputChange}
+            />
+          <br />
+          <label htmlFor="numTables">Number of Tables Available: </label>
+            <input
+              type="number"
+              name="numTables"
+              required
+              value={formData.numTables}
+              onChange={handleInputChange}
+            />
+          <br />
+          <label>
+            Other Information:
+            <textarea
+              name="miscInfo"
+              value={formData.miscInfo}
+              onChange={handleInputChange}
+            />
+          </label>
+          <br />
+          <label>
+            <input
+              type="checkbox"
+              checked={confirm}
+              onChange={(e) => setConfirm(e.target.checked)}
+            />
+            Confirm mass creation of available reservations
+          </label>
+          <br />
+          <button type="submit" disabled={!confirm}>
+            Create Available Reservations
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

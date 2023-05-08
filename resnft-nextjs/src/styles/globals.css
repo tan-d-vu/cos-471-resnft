@@ -217,9 +217,15 @@ label {
   float: left;
   background-color: var(--color-light-green);
   padding: 40px 40px;
-  margin: 80px 30px;
+  margin-top: 80px;
+  margin-left: 2%;
+  margin-right: 2%;
   font-size: 40;
   color: rgb(245, 245, 245);
+}
+
+.Section-icon{
+  margin: 30px;
 }
 
 /* --------------------- Landing --------------------- */
@@ -366,4 +372,8 @@ label {
   margin-top: 100px;
   text-align: center;
   justify-content: center;
+}
+
+.Select-option {
+  width: 30%;
 }
