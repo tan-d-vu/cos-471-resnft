@@ -115,7 +115,7 @@ function Navbar() {
           )}
         </div> */}
         {/* <h1 className="SiteName"> Flow NFT </h1> */}
-        <img src="../Logo.png" alt="logo" className="Nav-logo"/>
+        <img src="/Logo.png" alt="logo" className="Nav-logo"/>
       </div>
     </div>
   );

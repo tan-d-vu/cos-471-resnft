@@ -42,6 +42,7 @@ const GetNFTByOwner = ({ addr }) => {
               <div>{nft.Data}</div>
               <div>{nft.Bond}</div>
               <div>{nft.Royalties}</div>
+              <a>--------</a>
             </div>
           ))
         : ""}

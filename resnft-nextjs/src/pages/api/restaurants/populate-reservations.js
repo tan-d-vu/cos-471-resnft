@@ -85,7 +85,7 @@ const createReservations = (data) => {
       // create a reservation for each table
       for (let k = 0; k < numTables; k++) {
         reservations.push({
-          datetime: j.toLocaleString(DateTime.DATETIME_FULL),
+          datetime: j.toISO(),
           content: content,
         });
       }

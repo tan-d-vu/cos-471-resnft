@@ -70,7 +70,7 @@ const NFTsFromReservations = () => {
         console.log(res);
       })
       .then(() => {
-        router.push(`/users/${encodeURIComponent(user.addr)}`);
+        router.push(`/restaurants/allReservations/${encodeURIComponent(user.addr)}`);
       });
   };
 
