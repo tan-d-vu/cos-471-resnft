@@ -22,11 +22,12 @@ const UserProfile = () => {
 
   if (!profile) {
     return (
-      <div>
-        Profile Not Found
-        <br />
-        If you haven't created your profile, click{" "}
-        <Link href="/users/update-profile">here</Link> to create it.
+      <div className="Description">
+        Your wallet does not have a profile yet.
+        <br/>
+        <br/>
+        If you would like to create your profile, click{" "}
+        <Link href="/users/update-profile">here</Link>.
       </div>
     );
   }

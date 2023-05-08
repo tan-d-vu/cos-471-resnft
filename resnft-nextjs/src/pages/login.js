@@ -32,16 +32,22 @@ const Login = () => {
 
   return (
     <div className="Login">
-      log in
-      {!user || !user.addr ? (
-            <>
-              <button onClick={handleLogin} className="Nav-Button">
-                <h2>Login</h2>
-              </button>
-            </>
-          ) : (
-            ""
-          )}
+      <div className="Log-content">
+        <div className="Description">
+          In order to use our platform, you must connect a crypto wallet. You can log in here.
+        </div>
+        <div className="Log-btn-container">
+          {!user || !user.addr ? (
+                <>
+                  <button onClick={handleLogin} className="Log-Button">
+                    CONNECT WALLET
+                  </button>
+                </>
+              ) : (
+                ""
+              )}
+        </div>
+      </div>
     </div>
   );
 };

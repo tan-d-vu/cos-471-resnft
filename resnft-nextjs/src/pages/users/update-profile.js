@@ -61,78 +61,81 @@ const UpdateProfile = () => {
   return (
     <div className="update-profile">
       <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="userType">I am a:</label>
-          <select
-            name="userType"
-            value={formData.userType}
-            onChange={handleInputChange}
-          >
-            <option value="customer">Customer</option>
-            <option value="restaurant">Restaurant</option>
-          </select>
-        </div>
-        <div>
-          <label htmlFor="name">Name:</label>
-          <input
-            type="text"
-            name="name"
-            required
-            minLength="1"
-            maxLength="50"
-            value={formData.name}
-            onChange={handleInputChange}
-          />
-        </div>
+        <div className="Update-description">
+          <div>
+            <label htmlFor="userType">I am a: </label>
+            <select
+              name="userType"
+              value={formData.userType}
+              onChange={handleInputChange}
+            >
+              <option value="customer">Customer</option>
+              <option value="restaurant">Restaurant</option>
+            </select>
+          </div>
+          <div>
+            <label htmlFor="name">Name:</label>
+            <input
+              type="text"
+              name="name"
+              required
+              minLength="1"
+              maxLength="50"
+              value={formData.name}
+              onChange={handleInputChange}
+            />
+          </div>
 
-        {formData.userType === "restaurant" && (
-          <>
-            <div>
-              <label htmlFor="menu">Menu:</label>
-              <textarea
-                name="menu"
-                value={formData.menu}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div>
-              <label htmlFor="description">Description:</label>
-              <textarea
-                name="description"
-                value={formData.description}
-                onChange={handleInputChange}
-              />
-            </div>
-          </>
-        )}
-        <div>
-          <label htmlFor="location">Location:</label>
-          <input
-            type="text"
-            name="location"
-            value={formData.location}
-            onChange={handleInputChange}
-          />
+          {formData.userType === "restaurant" && (
+            <>
+              <div>
+                <label htmlFor="menu">Menu:</label>
+                <textarea
+                  name="menu"
+                  value={formData.menu}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div>
+                <label htmlFor="description">Description:</label>
+                <textarea
+                  name="description"
+                  value={formData.description}
+                  onChange={handleInputChange}
+                />
+              </div>
+            </>
+          )}
+          <div>
+            <label htmlFor="location">Location:</label>
+            <input
+              type="text"
+              name="location"
+              value={formData.location}
+              onChange={handleInputChange}
+            />
+          </div>
+          <br/>
+          <div>
+            <label htmlFor="email">Email:</label>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div>
+            <label htmlFor="phone">Phone:</label>
+            <input
+              type="tel"
+              name="phone"
+              value={formData.phone}
+              onChange={handleInputChange}
+            />
+          </div>
+          <button type="submit" className="Gen-Button">UPDATE</button>
         </div>
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="phone">Phone:</label>
-          <input
-            type="tel"
-            name="phone"
-            value={formData.phone}
-            onChange={handleInputChange}
-          />
-        </div>
-        <button type="submit">Update</button>
       </form>{" "}
     </div>
   );
