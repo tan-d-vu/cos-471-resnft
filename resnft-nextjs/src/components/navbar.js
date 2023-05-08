@@ -79,7 +79,7 @@ function Navbar() {
             <Link href="/about">About</Link>
           </div>
         </div>
-        <div className="Nav-Btns">
+        {/* <div className="Nav-Btns">
           {!user || !user.addr ? (
             <>
               <button onClick={handleLogin} className="Nav-Button">
@@ -92,7 +92,7 @@ function Navbar() {
 
           {user && user.addr ? (
             <>
-              {/* <button className="Nav-Button">
+              <button className="Nav-Button">
                 <h2>
                   <Link href={`/users/${encodeURIComponent(user.addr)}`}>
                     Profile
@@ -108,12 +108,12 @@ function Navbar() {
 
               <button onClick={logout} className="Nav-Button">
                 <h2>Logout</h2>
-              </button> */}
+              </button>
             </>
           ) : (
             ""
           )}
-        </div>
+        </div> */}
         {/* <h1 className="SiteName"> Flow NFT </h1> */}
         <img src="../Logo.png" alt="logo" className="Nav-logo"/>
       </div>

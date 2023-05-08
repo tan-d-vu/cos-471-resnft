@@ -27,26 +27,32 @@ function Index() {
     <div className="App">
       {user && user.addr ? (
         <div className="Home-wrapper">
-          <div className="Home-sections">
-            <div className="Home-section">To get started register with us</div>
-            <div className="Home-section">Create new reservations
-              <button className="Gen-Button">
-                <Link href="/mint">Create</Link>
-              </button>
+            <div className="Home-content">
+                <section className="Home-sec">To get started register with us</section>
+                <div className="Home-sec">Create new reservations
+                    <br></br>
+                    <button className="Gen-Button">
+                        <Link href="/mint">CREATE</Link>
+                    </button>
+                </div>
+                <div className="Home-sec">View existing reservations
+                    <br></br>
+                    <button className="Gen-Button">
+                        <Link href="/mint">VIEW</Link>
+                    </button>
+                </div>
             </div>
-            <div className="Home-section">To get started register with us</div>
-          </div>
-          <h2> Current Address : {user.addr} </h2>
-          <p> ----------------------</p>
-          <button onClick={() => setupAccount()} className="Gen-Button">
-            {" "}
-            Setup{" "}
-          </button>
-          <p> ----------------------</p>
-          <MintNFT />
-          <p> ----------------------</p>
-          <GetNFTByOwner addr={user.addr} />
-          <p> ----------------------</p>
+                {/* <h2> Current Address : {user.addr} </h2> */}
+                {/* <p> ----------------------</p>
+                <button onClick={() => setupAccount()} className="Gen-Button">
+                    {" "}
+                    Setup{" "}
+                </button>
+                <p> ----------------------</p>
+                <MintNFT />
+                <p> ----------------------</p>
+                <GetNFTByOwner addr={user.addr} />
+                <p> ----------------------</p> */}
         </div>
       ) : (
         ""

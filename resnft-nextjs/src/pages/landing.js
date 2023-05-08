@@ -11,7 +11,7 @@ const Landing = () => {
         <img src="../Plate.png" className="Landing-plate"/>
         <p>Where reservations become collectable</p>
         <button className="Landing-Button">
-          <Link href="/">ENTER</Link>
+          <Link href="/login">ENTER</Link>
         </button>
       </div>
     </div>

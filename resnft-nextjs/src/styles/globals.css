@@ -61,7 +61,10 @@ body {
   margin: 5px 16px;
   border: none;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.Gen-Button a {
   color: #f9f9f9;
+  text-decoration: none;
 }
 
 @keyframes App-logo-spin {
@@ -163,26 +166,26 @@ body {
   width: 7%;
   float: right;
   padding: 14px 35px;
-
 }
 
 .Home-wrapper{
   width: 100%;
+  height: 100vh;
 }
 
-.Home-sections{
-  width: 100%;
-  background-color: var(--color-green);
-  justify-content: center;
-  align-items: center;
+.Home-content{
+  width: 90%;
+  height: 50vh;
+  margin-left: 5%;
 }
 
-.Home-section{
-  width: 20%;
+.Home-sec{
+  width: 25%;
+  height: 100%;
   float: left;
   background-color: var(--color-light-green);
   padding: 40px 40px;
-  margin: 40px 40px;
+  margin: 80px 20px;
   font-size: 40;
   color: rgb(245, 245, 245);
 }
