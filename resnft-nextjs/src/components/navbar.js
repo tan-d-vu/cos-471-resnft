@@ -73,7 +73,7 @@ function Navbar() {
                 </Link>
               </>
             ) : (
-              ""
+              <Link href="/login">Login</Link>
             )}
 
             <Link href="/about">About</Link>

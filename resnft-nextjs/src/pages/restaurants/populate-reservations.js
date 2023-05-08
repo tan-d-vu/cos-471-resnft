@@ -1,18 +1,23 @@
 // Populating the database with available reservation times
-import { useState } from "react";
-import { useAuthContext } from "../../contexts/AuthContext";
+import { useState, useEffect } from "react";
+import { useAuthContext, useProfileContext } from "../../contexts/AuthContext";
 import { useRouter } from "next/router";
+import { useNewReservationsContext } from "@/contexts/CreateNewReservationsContext";
 
 const RestaurantCreateManyReservations = () => {
   const router = useRouter();
   const { user, _ } = useAuthContext();
+  const { profile, __ } = useProfileContext();
+
+  const { reservationsCreated, setReservationsCreated } =
+    useNewReservationsContext();
 
   const [formData, setFormData] = useState({
     period: "1 day",
     openingTime: "18:00",
     closingTime: "20:00",
-    reservationDuration: "45",
-    numTables: "10",
+    reservationDuration: "120",
+    numTables: "2",
     miscInfo: "xdfsdajkdsfauiuiweqr",
     pubKey: "",
   });
@@ -26,7 +31,15 @@ const RestaurantCreateManyReservations = () => {
       </div>
     );
   } else {
-    formData.pubKey = user.addr;
+    if (profile.isRestaurant) {
+      formData.pubKey = user.addr;
+    } else {
+      return (
+        <div className="update-profile">
+          <h2> Only restaurants can create reservations.</h2>
+        </div>
+      );
+    }
   }
 
   const handleInputChange = (e) => {
@@ -44,15 +57,14 @@ const RestaurantCreateManyReservations = () => {
         },
       })
         .then((res) => res.json())
-        .then((data) => console.log(data))
+        .then((data) => {
+          setReservationsCreated(data.reservationsCreated);
+        })
+        .then(() => {
+          router.push(`/restaurants/nfts-from-reservations`);
+        })
         .catch((error) => console.error(error));
     }
-
-    setTimeout(() => {
-      router.push(
-        `/restaurants/allReservations/${encodeURIComponent(user.addr)}`
-      );
-    }, 2000); // wait for db to populate lol...
   };
 
   return (
@@ -141,7 +153,6 @@ const RestaurantCreateManyReservations = () => {
 };
 
 export default RestaurantCreateManyReservations;
-
 
 // TODO:
 // After creating in db, redirect to /restaurants/allReservations/[pubKey]

@@ -1,9 +1,9 @@
 import "@/styles/globals.css";
 import Layout from "@/layout/Layout";
 import * as fcl from "@onflow/fcl";
-import { AuthWrapper } from "@/contexts/AuthContext";
-import { ProfileWrapper } from "@/contexts/AuthContext";
-import {useRouter} from 'next/router';
+import { AuthWrapper, ProfileWrapper } from "@/contexts/AuthContext";
+import { NewReservationsWrapper } from "@/contexts/CreateNewReservationsContext";
+import { useRouter } from "next/router";
 
 fcl
   .config()
@@ -13,16 +13,19 @@ fcl
   .put("discovery.wallet", "https://fcl-discovery.onflow.org/testnet/authn");
 
 export default function App({ Component, pageProps }) {
-  const router = useRouter()
+  const router = useRouter();
   console.log(router.pathname);
-  if (router.pathname == "/")
-    return (<Component {...pageProps} />)
+  if (router.pathname == "/") return <Component {...pageProps} />;
+
   return (
+    // Whatever...
     <AuthWrapper>
       <ProfileWrapper>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <NewReservationsWrapper>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </NewReservationsWrapper>
       </ProfileWrapper>
     </AuthWrapper>
   );

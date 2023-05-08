@@ -27,23 +27,27 @@ function Index() {
     <div className="App">
       {user && user.addr ? (
         <div className="Home-wrapper">
-            <div className="Home-content">
-                <section className="Home-sec">To get started register with us</section>
-                <div className="Home-sec">Create new reservations
-                    <br></br>
-                    <button className="Gen-Button">
-                        <Link href="/mint">CREATE</Link>
-                    </button>
-                </div>
-                <div className="Home-sec">View existing reservations
-                    <br></br>
-                    <button className="Gen-Button">
-                        <Link href="/mint">VIEW</Link>
-                    </button>
-                </div>
+          <div className="Home-content">
+            <section className="Home-sec">
+              To get started register with us
+            </section>
+            <div className="Home-sec">
+              Create new reservations
+              <br></br>
+              <button className="Gen-Button">
+                <Link href="/mint">CREATE</Link>
+              </button>
             </div>
-                {/* <h2> Current Address : {user.addr} </h2> */}
-                {/* <p> ----------------------</p>
+            <div className="Home-sec">
+              View existing reservations
+              <br></br>
+              <button className="Gen-Button">
+                <Link href="/mint">VIEW</Link>
+              </button>
+            </div>
+          </div>
+          {/* <h2> Current Address : {user.addr} </h2> */}
+          {/* <p> ----------------------</p>
                 <button onClick={() => setupAccount()} className="Gen-Button">
                     {" "}
                     Setup{" "}
@@ -55,7 +59,9 @@ function Index() {
                 <p> ----------------------</p> */}
         </div>
       ) : (
-        ""
+        <button className="Landing-Button">
+          <Link href="/login">Login</Link>
+        </button>
       )}
     </div>
   );

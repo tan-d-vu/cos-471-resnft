@@ -112,21 +112,27 @@ export default async function handler(req, res) {
   }
 
   // Create reservations data
-  const reservations = createReservations(req.body);
+  const reservationDataList = createReservations(req.body);
 
-  // Populate in database
-  const user = await prisma.user.update({
-    where: {
-      pubKey: req.body.pubKey,
-    },
-    data: {
-      reservations: {
-        createMany: {
-          data: reservations,
+  let reservationsCreated = [];
+
+  for (const reservationData of reservationDataList) {
+    const newReservation = await prisma.reservation.create({
+      data: {
+        datetime: reservationData.datetime,
+        content: reservationData.content,
+        author: {
+          connect: { pubKey: req.body.pubKey },
         },
       },
-    },
-  });
-  
-  return res.status(200).json({ message: "Reservations created." });
+    });
+    reservationsCreated.push(newReservation);
+  }
+
+  return res
+    .status(200)
+    .json({
+      message: "Reservations created.",
+      reservationsCreated: reservationsCreated,
+    });
 }
