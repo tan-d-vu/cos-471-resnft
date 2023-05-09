@@ -8,7 +8,7 @@ const About = () => {
           <p>
             ResNFT is a NFT minting and trading platform designed specifically
             for restaurant reservations. We created this platform for restaurants to 
-            turn their deposit based reservations into resaleable and tradeable 
+            turn their deposit based reservations into reseleable and tradeable 
             NFTs. Now restaurants can make royalties as reservations change hands and 
             last minute reservation changes don't have to lead to a deposit loss for 
             customers.

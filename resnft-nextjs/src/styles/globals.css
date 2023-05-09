@@ -50,6 +50,16 @@ body {
   color: #61dafb;
 }
 
+.site{
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.main{
+  flex: 1;
+}
+
 .modal-window {
   width: 100vw;
   height: 100vh;
@@ -253,10 +263,13 @@ label {
 }
 
 .foot-container{
-  width: 100%;
+  width: 20%;
   padding-left: 40%;
+  margin-bottom: 20px;
+  margin-top: 20px;
   color: var(--color-green);
   overflow: hidden;
+  text-align: center;
 }
 .foot-container a {
   float: left;

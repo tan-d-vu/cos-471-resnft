@@ -5,7 +5,7 @@ function Footer() {
   return (
     <div className="footer">
       <div className="foot-container">
-        &copy; This site was created by the ResNFT team
+        &copy; Created by the ResNFT Team
       </div>
     </div>
   );
