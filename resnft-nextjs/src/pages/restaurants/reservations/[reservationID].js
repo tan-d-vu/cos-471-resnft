@@ -57,6 +57,7 @@ const ShowReservationToBook = ({ reservation }) => {
   // keys {id, content, restaurantID, datetime, isAvailable, nft})
   return (
     <>
+    <div className="Update-description">
       {reservation.datetime}
       <br />
       {reservation.nft}
@@ -65,7 +66,7 @@ const ShowReservationToBook = ({ reservation }) => {
       <br />
       {reservation.restaurantID}
       <br />
-      Price: {salePrice}
+      Price: ${salePrice}
       <br />
       <>
         {reservation.isAvailable ? (
@@ -88,6 +89,7 @@ const ShowReservationToBook = ({ reservation }) => {
           <>This reservation is not available</>
         )}
       </>
+      </div>
     </>
   );
 };
