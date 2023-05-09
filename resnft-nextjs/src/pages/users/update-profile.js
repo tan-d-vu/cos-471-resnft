@@ -119,19 +119,23 @@ const UpdateProfile = () => {
             <>
               <div>
                 <label htmlFor="menu">Menu:</label>
-                <textarea
-                  name="menu"
-                  value={formData.menu}
-                  onChange={handleInputChange}
-                />
+                <div className="short-answer">
+                  <textarea
+                    name="menu"
+                    value={formData.menu}
+                    onChange={handleInputChange}
+                  />
+                </div>
               </div>
               <div>
                 <label htmlFor="description">Description:</label>
-                <textarea
-                  name="description"
-                  value={formData.description}
-                  onChange={handleInputChange}
-                />
+                <div className="short-answer">
+                  <textarea
+                    name="description"
+                    value={formData.description}
+                    onChange={handleInputChange}
+                  />
+                </div>
               </div>
             </>
           )}
@@ -161,16 +165,15 @@ const UpdateProfile = () => {
           <div>
             <label htmlFor="phone">Phone:</label>
             <div className="short-answer">
-            <input
-              type="tel"
-              name="phone"
-              value={formData.phone}
-              onChange={handleInputChange}
-            />
+              <input
+                type="tel"
+                name="phone"
+                value={formData.phone}
+                onChange={handleInputChange}
+              />
+            </div>
           </div>
-
-          </div>
-          <br/>
+          <br />
           <button type="submit" className="Gen-Button">
             UPDATE
           </button>
