@@ -46,9 +46,12 @@ function Index() {
           </div>
         </div>
       ) : (
-        <button className="Landing-Button">
-          <Link href="/login">Login</Link>
-        </button>
+        <div>
+          <meta http-equiv="refresh" content="0; /login" />
+          {/* <button className="Landing-Button">
+            <Link href="/login">Login</Link>
+          </button> */}
+        </div>
       )}
     </div>
   );

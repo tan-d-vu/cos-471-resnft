@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useAuthContext } from "@/contexts/AuthContext";
 import { getSalePrice } from "@/utils/utils";
 import { purchase } from "@/cadence/transactions/Purchase";
+import { DateTime } from "luxon";
 import * as fcl from "@onflow/fcl";
 
 const ShowReservationToBook = ({ reservation }) => {
@@ -57,38 +58,48 @@ const ShowReservationToBook = ({ reservation }) => {
   // keys {id, content, restaurantID, datetime, isAvailable, nft})
   return (
     <>
-    <div className="Update-description">
-      {reservation.datetime}
-      <br />
-      {reservation.nft}
-      <br />
-      {reservation.content}
-      <br />
-      {reservation.restaurantID}
-      <br />
-      Price: ${salePrice}
-      <br />
-      <>
-        {reservation.isAvailable ? (
-          <>
-            {!user || !user.addr ? (
-              <>Log in to book this reservation</>
-            ) : (
-              <>
-                {user.addr != reservation.restaurantID ? (
-                  <>
-                    <button onClick={() => handlePurchase()}>Purchase</button>
-                  </>
-                ) : (
-                  <>You own this reservation</>
-                )}
-              </>
-            )}
-          </>
-        ) : (
-          <>This reservation is not available</>
+      <div className="Update-description">
+        Reservation NFT ID: {reservation.nft}
+        <br/>
+        Restaurant: {reservation.restaurantID}
+        <br />
+        at
+        <br />
+        {DateTime.fromISO(reservation.datetime).toLocaleString(
+          DateTime.DATETIME_FULL
         )}
-      </>
+        <br />
+        <br />
+        <pre>{reservation.content}</pre>
+        <br /> <br />
+        Price: ${salePrice}
+        <br /> <br />
+        <>
+          {reservation.isAvailable ? (
+            <>
+              {!user || !user.addr ? (
+                <>Log in to book this reservation</>
+              ) : (
+                <>
+                  {user.addr != reservation.restaurantID ? (
+                    <>
+                      <button
+                        className="Gen-Button"
+                        onClick={() => handlePurchase()}
+                      >
+                        Purchase
+                      </button>
+                    </>
+                  ) : (
+                    <>You own this reservation</>
+                  )}
+                </>
+              )}
+            </>
+          ) : (
+            <>This reservation is not available</>
+          )}
+        </>
       </div>
     </>
   );

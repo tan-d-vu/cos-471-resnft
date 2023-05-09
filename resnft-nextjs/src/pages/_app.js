@@ -22,9 +22,13 @@ export default function App({ Component, pageProps }) {
     <AuthWrapper>
       <ProfileWrapper>
         <NewReservationsWrapper>
+          <div className="site">
           <Layout>
-            <Component {...pageProps} />
+            <div className="main">
+              <Component {...pageProps} />
+            </div>
           </Layout>
+          </div>
         </NewReservationsWrapper>
       </ProfileWrapper>
     </AuthWrapper>

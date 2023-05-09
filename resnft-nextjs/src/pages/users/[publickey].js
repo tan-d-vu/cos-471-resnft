@@ -24,8 +24,8 @@ const UserProfile = () => {
     return (
       <div className="Description">
         Your wallet does not have a profile yet.
-        <br/>
-        <br/>
+        <br />
+        <br />
         If you would like to create your profile, click{" "}
         <Link href="/users/update-profile">here</Link>.
       </div>
@@ -34,17 +34,33 @@ const UserProfile = () => {
 
   return (
     <div className="user-profile">
-      <div className="Update-description">
-        <h1>Your Profile</h1>
-        <h2> Pubkey: {profile.pubKey} </h2>
-        <h2> Name: {profile.name} </h2>
-        <h2> Email: {profile.email} </h2>
-        <h2> Phone: {profile.phone} </h2>
-        <h2> Loc: {profile.location} </h2>
-        <h2> Menu: {profile.menu} </h2>
-        <h2> Description: {profile.description} </h2>
-        <h2> NFTs: <GetNFTByOwner addr={profile.pubKey} /> </h2>
+      <div className="center-page-title">
+        <h1>User Profile</h1>
       </div>
+      <h2>Public Key: {profile.pubKey}</h2>
+      <br />
+      <h2> Name: {profile.name} </h2>
+      <br />
+      <h2> Email: {profile.email} </h2>
+      <br />
+      <h2> Phone: {profile.phone} </h2>
+      <br />
+      <h2> Location: {profile.location} </h2>
+      <br />
+      {profile.isRestaurant ? (
+        <>
+          <h2> Menu: {profile.menu} </h2>
+          <br />
+          <h2> Description: {profile.description} </h2>
+          <br />
+        </>
+      ) : (
+        ""
+      )}
+
+      <h2>
+       NFTs Owned: <GetNFTByOwner addr={profile.pubKey} />
+      </h2>
     </div>
   );
 };

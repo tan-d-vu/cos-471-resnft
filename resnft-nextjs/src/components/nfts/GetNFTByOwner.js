@@ -2,6 +2,50 @@ import React, { useState, useEffect } from "react";
 import * as fcl from "@onflow/fcl";
 import { getData } from "../../cadence/scripts/getData.js";
 import { setReservationNFTs } from "@/utils/utils.js";
+import Modal from "react-modal";
+
+const NFTModal = ({ nft }) => {
+  const [showModal, setShowModal] = useState(false);
+
+  const handleClose = () => setShowModal(false);
+  const handleShow = () => setShowModal(true);
+
+  return (
+    <>
+      <button onClick={handleShow} className="Gen-Button button-inline-block">
+      {nft.ID}
+      </button>
+      <Modal
+        isOpen={showModal}
+        onRequestClose={handleClose}
+        contentLabel="NFT Modal"
+        className="my-modal modal-window"
+      >
+        <div className="modal-content">
+          <button onClick={handleClose} className="Close-Button">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="20"
+              viewBox="0 96 960 960"
+              width="20"
+            >
+              <path d="m251.333 866.406-61.739-61.739L418.26 576 189.594 347.333l61.739-61.739L480 514.26l228.667-228.666 61.739 61.739L541.74 576l228.666 228.667-61.739 61.739L480 637.74 251.333 866.406Z" />
+            </svg>
+          </button>
+          <h3>NFT ID: {nft.ID}</h3>
+          <h3>Restaurant: {nft.Creator}</h3>
+          <h3>Reservation Information: <pre>{nft.Data}</pre></h3>
+
+        </div>
+      </Modal>
+    </>
+  );
+};
+
+
+
+
+
 
 // Placeholder rn. Not actually getting NFTs by ID
 const GetNFTByOwner = ({ addr }) => {
@@ -23,6 +67,7 @@ const GetNFTByOwner = ({ addr }) => {
     if (addr) {
       fetchNFT({ addr }).then((data) => {
         setNfts(data);
+        console.log(data);
       });
     }
   }, [addr]);
@@ -38,21 +83,14 @@ const GetNFTByOwner = ({ addr }) => {
   }, [nfts]);
 
   return (
-    <div>
+    <div className="reservation-list">
+      Count: {nfts ? nfts.length : 0}
+      <br />
       {nfts
         ? nfts.map((nft, index) => (
-            <div key={index}>
-              <div>ID: {nft.ID}</div>
-              <div>{nft.Name}</div>
-              <div>{nft.Data}</div>
-              <div>{nft.Bond}</div>
-              <div>{nft.Royalties}</div>
-              <a>--------</a>
-            </div>
+          <NFTModal key={index} nft={nft} />
           ))
         : ""}
-
-      {nfts ? nfts.length : 0}
     </div>
   );
 };

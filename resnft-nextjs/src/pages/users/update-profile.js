@@ -83,8 +83,11 @@ const UpdateProfile = () => {
 
   return (
     <div className="update-profile">
+      <div className="center-page-title">
+        <h2> Update Your Profile </h2>
+      </div>
       <form onSubmit={handleSubmit}>
-        <div className="Update-description">
+        <div className="Update-form">
           <div>
             <label htmlFor="userType">I am a: </label>
             <select
@@ -116,19 +119,23 @@ const UpdateProfile = () => {
             <>
               <div>
                 <label htmlFor="menu">Menu:</label>
-                <textarea
-                  name="menu"
-                  value={formData.menu}
-                  onChange={handleInputChange}
-                />
+                <div className="short-answer">
+                  <textarea
+                    name="menu"
+                    value={formData.menu}
+                    onChange={handleInputChange}
+                  />
+                </div>
               </div>
               <div>
                 <label htmlFor="description">Description:</label>
-                <textarea
-                  name="description"
-                  value={formData.description}
-                  onChange={handleInputChange}
-                />
+                <div className="short-answer">
+                  <textarea
+                    name="description"
+                    value={formData.description}
+                    onChange={handleInputChange}
+                  />
+                </div>
               </div>
             </>
           )}
@@ -146,23 +153,27 @@ const UpdateProfile = () => {
           <br />
           <div>
             <label htmlFor="email">Email:</label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleInputChange}
-            />
+            <div className="short-answer">
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleInputChange}
+              />
+            </div>
           </div>
           <div>
             <label htmlFor="phone">Phone:</label>
-            <input
-              type="tel"
-              name="phone"
-              value={formData.phone}
-              onChange={handleInputChange}
-            />
+            <div className="short-answer">
+              <input
+                type="tel"
+                name="phone"
+                value={formData.phone}
+                onChange={handleInputChange}
+              />
+            </div>
           </div>
-          <br/>
+          <br />
           <button type="submit" className="Gen-Button">
             UPDATE
           </button>
