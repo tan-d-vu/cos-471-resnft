@@ -83,8 +83,11 @@ const UpdateProfile = () => {
 
   return (
     <div className="update-profile">
+      <div className="center-page-title">
+        <h2> Update Your Profile </h2>
+      </div>
       <form onSubmit={handleSubmit}>
-        <div className="Update-description">
+        <div className="Update-form">
           <div>
             <label htmlFor="userType">I am a: </label>
             <select
@@ -146,21 +149,26 @@ const UpdateProfile = () => {
           <br />
           <div>
             <label htmlFor="email">Email:</label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleInputChange}
-            />
+            <div className="short-answer">
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleInputChange}
+              />
+            </div>
           </div>
           <div>
             <label htmlFor="phone">Phone:</label>
+            <div className="short-answer">
             <input
               type="tel"
               name="phone"
               value={formData.phone}
               onChange={handleInputChange}
             />
+          </div>
+
           </div>
           <br/>
           <button type="submit" className="Gen-Button">
