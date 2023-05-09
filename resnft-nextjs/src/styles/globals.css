@@ -67,12 +67,12 @@ body {
 }
 
 .my-modal {
-  width: 30%;
-  min-width: 350px;
-  height: 350px;
-  margin-left: 35%;
-  margin-top: 12%;
-  padding-top: 90px;
+  width: 26%;
+  min-width: 300px;
+  height: 300px;
+  margin-left: 37%;
+  margin-top: 18%;
+  padding-top: 20px;
   background-color: white;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
@@ -86,7 +86,7 @@ body {
 }
 
 .my-modal .Gen-Button {
-  margin-top: 100px;
+  margin-top: 20px;
 }
 
 input[type="text"],
