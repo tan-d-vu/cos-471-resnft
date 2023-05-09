@@ -44,12 +44,9 @@ const ShowReservationToBook = ({ reservation }) => {
   };
 
   const handlePurchase = async () => {
-    const buyerAddr = reservation.restaurantID;
-    const tokenID = reservation.nft;
-
     await makePurchase({
       addr: reservation.restaurantID,
-      tokenID: tokenID,
+      tokenID: reservation.nft,
       price: salePrice,
     }).then((res) => {
       console.log(res);

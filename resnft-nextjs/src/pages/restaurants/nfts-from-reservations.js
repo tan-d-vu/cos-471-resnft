@@ -6,6 +6,7 @@ import { useNewReservationsContext } from "@/contexts/CreateNewReservationsConte
 import { setReservationNFTs } from "@/utils/utils";
 import { getData } from "@/cadence/scripts/getData";
 import * as fcl from "@onflow/fcl";
+import { DateTime } from "luxon";
 
 function transformArray(arr) {
   // Get all unique keys from the array of maps
@@ -44,7 +45,7 @@ const NFTsFromReservations = () => {
   const authz = fcl.currentUser().authorization;
 
   const mintAndCreateSale = async () => {
-    await fcl
+    await fcl // mint NFTs and create sale
       .send([
         fcl.transaction(createandsale),
         fcl.args([
@@ -63,11 +64,13 @@ const NFTsFromReservations = () => {
         return fcl.decode(res);
       })
       .then((res) => {
+        // Wait for transaction to be sealed
         console.log(res);
         fcl
           .tx(res)
           .onceSealed()
           .then(() => {
+            // Get NFTs from user's account
             fcl
               .send([
                 fcl.script(getData),
@@ -77,6 +80,7 @@ const NFTsFromReservations = () => {
                 return fcl.decode(response);
               })
               .then((data) => {
+                // Connect to reservations in db
                 setReservationNFTs({ addr: user.addr, nfts: data }).then(
                   (data) => {
                     if (data) {
@@ -90,6 +94,7 @@ const NFTsFromReservations = () => {
               });
           })
           .then(() => {
+            // Redirect to user's reservations
             router.push(
               `/restaurants/allReservations/${encodeURIComponent(user.addr)}`
             );
@@ -127,30 +132,78 @@ const NFTsFromReservations = () => {
     }
   };
 
+  const reservationByDate = reservationsCreated.reduce((acc, obj) => {
+    const date = obj.datetime.split("T")[0];
+    acc[date] = acc[date] || [];
+    acc[date].push(obj);
+    return acc;
+  }, {});
+
+  console.log(reservationByDate);
+
   return (
     <div className="mint-and-create-sale">
+      <div className="center-page-title">
       <h2> NFTs from Reservations </h2>
-      reservationsCreated: {JSON.stringify(reservationsToMint)}
-      <br />
-      <div>
-        <input
-          type="number"
-          step="1"
-          placeholder="Set Mint Bond"
-          onChange={(e) => handleMintBondChange(e)}
-        />
-        <input
-          type="number"
-          step="0.01"
-          min="0"
-          max="1"
-          placeholder="Set Mint Royalties"
-          onChange={handleMintRoyaltiesChange}
-        />
-        <button onClick={() => mintAndCreateSale()}>
-          {" "}
-          Mint NFTs and Create Sale{" "}
-        </button>
+      </div>
+
+      <div className="gen-text">
+        <p>
+          Following reservations created in database:
+        </p>
+      </div>
+
+      <div className="reservation-list">
+        {Object.entries(reservationByDate).map(([date, reservations]) => (
+          <div key={date}>
+            <h3>{date}</h3>
+            {reservations.map((reservation) => (
+              <button className="Gen-Button button-inline-block">
+                {DateTime.fromISO(reservation.datetime).toLocaleString(
+                  DateTime.TIME_SIMPLE
+                )}
+              </button>
+            ))}
+          </div>
+        ))}
+      </div>
+
+      <div className="gen-text">
+        <p>
+          Fill out price for reservation NFTs and royalties ratio to mint and list reservation NFTs for sale.
+        </p>
+      </div>
+
+      <div className="w-75 mint-form">
+        <div>
+          <label htmlFor="mintBond">NFT Price: </label>
+          <input
+            type="number"
+            name="mintBond"
+            step="1"
+            placeholder="Set Price to Buy Reservation NFTs"
+            onChange={(e) => handleMintBondChange(e)}
+          />
+        </div>
+
+        <div>
+        <label htmlFor="mintRoyalties">Royalty Ratio</label>
+          <input
+            type="number"
+            name="mintRoyalties"
+            step="0.01"
+            min="0"
+            max="1"
+            placeholder="Set Mint Royalties"
+            onChange={handleMintRoyaltiesChange}
+          />
+        </div>
+        <div className="center">
+          <button className="Gen-Button" onClick={() => mintAndCreateSale()}>
+            {" "}
+            Mint NFTs and Create Sale{" "}
+          </button>
+        </div>
       </div>
     </div>
   );
