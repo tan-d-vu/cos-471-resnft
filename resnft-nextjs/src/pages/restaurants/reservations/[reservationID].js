@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useAuthContext } from "@/contexts/AuthContext";
 import { getSalePrice } from "@/utils/utils";
 import { purchase } from "@/cadence/transactions/Purchase";
+import { DateTime } from "luxon";
 import * as fcl from "@onflow/fcl";
 
 const ShowReservationToBook = ({ reservation }) => {
@@ -58,16 +59,24 @@ const ShowReservationToBook = ({ reservation }) => {
   return (
     <>
     <div className="Update-description">
-      {reservation.datetime}
+      
+      {DateTime.fromISO(reservation.datetime).toLocaleString(
+              DateTime.DATE_SIMPLE
+            )}
+      <br/>
+      {DateTime.fromISO(reservation.datetime).toLocaleString(
+              DateTime.TIME_SIMPLE
+            )}
+
       <br />
       {reservation.nft}
       <br />
       {reservation.content}
       <br />
       {reservation.restaurantID}
-      <br />
+      <br /> <br/>
       Price: ${salePrice}
-      <br />
+      <br /> <br/>
       <>
         {reservation.isAvailable ? (
           <>
@@ -77,7 +86,7 @@ const ShowReservationToBook = ({ reservation }) => {
               <>
                 {user.addr != reservation.restaurantID ? (
                   <>
-                    <button onClick={() => handlePurchase()}>Purchase</button>
+                    <button className="Gen-Button" onClick={() => handlePurchase()}>Purchase</button>
                   </>
                 ) : (
                   <>You own this reservation</>
