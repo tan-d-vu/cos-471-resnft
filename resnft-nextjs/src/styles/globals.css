@@ -363,20 +363,29 @@ label {
 /* --------------------- About --------------------- */
 
 .Content{
-  color: white;
   text-align: center;
   justify-content: center;
+}
+
+.team-header{
+  height: auto;
+  color: var(--color-green);
+  font-size: 24px;
 }
 
 .section{
   width: 50%;
   height: auto;
-  margin-left: 25%;
+  margin-left: 22%;
   margin-top: 40px;
-  padding: 20px 16px;
+  margin-bottom: 40px;
+  padding: 20px 3%;
   justify-content: center;
   align-items: center;
   background-color: var(--color-green);
+  border-radius: 8px;
+  color: white;
+  font-size: 20px;
 }
 
 .section-2{
@@ -384,12 +393,15 @@ label {
   height: auto;
   float: left;
   position: relative;
-  margin-left: 10%;
-  margin-top: 40px;
-  padding: 30px 16px;
+  margin-left: 8%;
+  margin-top: 10px;
+  margin-bottom: 40px;
+  padding: 30px 2%;
   justify-content: center;
   align-items: center;
   background-color: var(--color-green);
+  border-radius: 8px;
+  color: white;
 }
 
 .Member{
