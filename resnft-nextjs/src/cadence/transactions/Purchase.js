@@ -8,6 +8,7 @@ import Marketplace from 0x5b0d2b644cfa424e
 
 // This transaction uses the signers Vault tokens to purchase an NFT
 // from the Sale collection of account addr.
+
 transaction(addr: Address, tokenID: UInt64, price: UFix64) {
 
     // Capability to the buyer's NFT collection where they

@@ -7,9 +7,7 @@ import FungibleToken from 0x9a0766d93b6608b7
 import RestNFT from 0x18bdaac138c4e23f
 import Marketplace from 0x5b0d2b644cfa424e
 
-// This transaction creates a new Sale Collection object,
-// lists an NFT for sale, puts it in account storage,
-// and creates a public capability to the sale so that others can buy the token.
+// This transaction creates a new single sale for the nft
 transaction(tokenID: UInt64, price: UFix64) {
 
     prepare(acct: AuthAccount) {

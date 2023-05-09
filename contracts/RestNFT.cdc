@@ -1,11 +1,9 @@
-// ExampleNFT.cdc
+// RestNFT
 //
-// This is a complete version of the ExampleNFT contract
+// This is a complete version of the RestNFT contract
 // that includes withdraw and deposit functionality, as well as a
 // collection resource that can be used to bundle NFTs together.
 //
-// Learn more about non-fungible tokens in this tutorial: https://developers.flow.com/cadence/tutorial/05-non-fungible-tokens-2
-
 pub contract RestNFT {
 
     // Declare Path constants so paths do not have to be hardcoded
