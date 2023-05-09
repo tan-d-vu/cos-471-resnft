@@ -50,6 +50,78 @@ body {
   color: #61dafb;
 }
 
+.modal-window {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  
+}
+
+.my-modal {
+  width: 30%;
+  min-width: 350px;
+  height: 400px;
+  margin-left: 35%;
+  margin-top: 12%;
+  padding-top: 1px;
+  background-color: white;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+} 
+
+.modal-window {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  
+}
+
+.my-modal {
+  width: 30%;
+  min-width: 350px;
+  height: 400px;
+  margin-left: 35%;
+  margin-top: 12%;
+  padding-top: 1px;
+  background-color: white;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+} 
+
+.modal-window {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  
+}
+
+.my-modal {
+  width: 30%;
+  min-width: 350px;
+  height: 400px;
+  margin-left: 35%;
+  margin-top: 12%;
+  padding-top: 1px;
+  background-color: white;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+} 
+
+.modal-window {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  
+}
+
+.my-modal {
+  width: 30%;
+  min-width: 350px;
+  height: 400px;
+  margin-left: 35%;
+  margin-top: 12%;
+  padding-top: 1px;
+  background-color: white;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+} 
+
 input[type=text], input[type=number], select, textarea {
   width: 100%;
   padding: 12px;
@@ -76,9 +148,19 @@ label {
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   color: #f9f9f9;
 }
+
 .Gen-Button a {
   color: #f9f9f9;
   text-decoration: none;
+}
+
+.Close-Button {
+  padding: 0px 16px;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border-radius: 18px;
+  border: none;
 }
 
 .Log-Button{
@@ -339,20 +421,29 @@ label {
 /* --------------------- About --------------------- */
 
 .Content{
-  color: white;
   text-align: center;
   justify-content: center;
+}
+
+.team-header{
+  height: auto;
+  color: var(--color-green);
+  font-size: 24px;
 }
 
 .section{
   width: 50%;
   height: auto;
-  margin-left: 25%;
+  margin-left: 22%;
   margin-top: 40px;
-  padding: 20px 16px;
+  margin-bottom: 40px;
+  padding: 20px 3%;
   justify-content: center;
   align-items: center;
   background-color: var(--color-green);
+  border-radius: 8px;
+  color: white;
+  font-size: 20px;
 }
 
 .section-2{
@@ -360,12 +451,15 @@ label {
   height: auto;
   float: left;
   position: relative;
-  margin-left: 10%;
-  margin-top: 40px;
-  padding: 30px 16px;
+  margin-left: 8%;
+  margin-top: 10px;
+  margin-bottom: 40px;
+  padding: 30px 2%;
   justify-content: center;
   align-items: center;
   background-color: var(--color-green);
+  border-radius: 8px;
+  color: white;
 }
 
 .Member{
@@ -394,6 +488,12 @@ label {
   width: 50%;
   padding-left: 24%;
 }
+
+
+
+
+
+
 
 /* --------------------- Misc --------------------- */
 

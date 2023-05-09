@@ -7,26 +7,32 @@ const About = () => {
         <div className="section">
           <p>
             ResNFT is a NFT minting and trading platform designed specifically
-            for restaurant reservations....
+            for restaurant reservations. We created this platform for restaurants to 
+            turn their deposit based reservations into resaleable and tradeable 
+            NFTs. Now restaurants can make royalties as reservations change hands and 
+            last minute reservation changes don't have to lead to a deposit loss for 
+            customers.
           </p>
         </div>
+        <div className="team-header">
+          <h1>The Team</h1>
+        </div>
         <div className="section-2">
-          <h2>The Team</h2>
           <div className="Member">
             <h3>Ari</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p>Frontend lead, worked to make the flow of the app intuitive and understandable through overall organization, routing, and style.</p>
           </div>
           <div className="Member">
             <h3>Kevin</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p>Backend lead, took the reigns in the creation of the minting and trading functions. Learned Cadence and the ins and outs of the Flow network.</p>
           </div>
           <div className="Member">
             <h3>Kat</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p>Took the lead in the writing of the report and worked to support the team through organizing meetings and updates.</p>
           </div>
           <div className="Member">
             <h3>Tan</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p>Led the team in the aspects of database creation, routing, and overall connection from backend to frontend. The project could not function without his efforts.</p>
           </div>
           <div className="Member"></div>
           <div className="Member"></div>
