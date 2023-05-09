@@ -33,6 +33,14 @@ const NFTsFromReservations = () => {
   const [mintRoyaltiesArray, setMintRoyalties] = useState();
   const [priceArray, setSalePrice] = useState();
 
+  if (!reservationsCreated) {
+    return (
+      <div className="update-profile">
+        <h2> Please Create Reservations to Mint NFTs</h2>
+      </div>
+    );
+  }
+
   const reservationsToMint = transformArray(reservationsCreated);
 
   const mintNameArray = reservationsToMint.id;
