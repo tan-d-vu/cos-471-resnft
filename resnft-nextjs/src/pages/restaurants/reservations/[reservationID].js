@@ -47,39 +47,39 @@ const ShowReservationToBook = ({ reservation }) => {
   // keys {id, content, restaurantID, datetime, isAvailable, nft})
   return (
     <>
-      {reservation.datetime}
-      <br />
-      {reservation.nft}
-      <br />
-      {reservation.content}
-      <br />
-      {reservation.restaurantID}
-      <br />
-      Price: {salePrice}
-      <br />
-      <>
-        {reservation.isAvailable ? (
-          <>
-            {!user || !user.addr ? (
-              <>Log in to book this reservation</>
-            ) : (
-              <>
-                {user.addr != reservation.restaurantID ? (
-                  <>
-                  <button onClick={() => handlePurchase()}>
-                    Purchase
-                  </button>
-                  </>
-                ) : (
-                  <>You own this reservation</>
-                )}
-              </>
-            )}
-          </>
-        ) : (
-          <>This reservation is not available</>
-        )}
-      </>
+        {reservation.datetime}
+        <br />
+        {reservation.nft}
+        <br />
+        {reservation.content}
+        <br />
+        {reservation.restaurantID}
+        <br />
+        Price: {salePrice}
+        <br />
+        <>
+          {reservation.isAvailable ? (
+            <>
+              {!user || !user.addr ? (
+                <>Log in to book this reservation</>
+              ) : (
+                <>
+                  {user.addr != reservation.restaurantID ? (
+                    <>
+                    <button onClick={() => handlePurchase()}>
+                      Purchase
+                    </button>
+                    </>
+                  ) : (
+                    <>You own this reservation</>
+                  )}
+                </>
+              )}
+            </>
+          ) : (
+            <>This reservation is not available</>
+          )}
+        </>
     </>
   );
 };

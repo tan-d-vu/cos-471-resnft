@@ -99,15 +99,17 @@ const UpdateProfile = () => {
           </div>
           <div>
             <label htmlFor="name">Name:</label>
-            <input
-              type="text"
-              name="name"
-              required
-              minLength="1"
-              maxLength="50"
-              value={formData.name}
-              onChange={handleInputChange}
-            />
+            <div className="short-answer">
+              <input
+                type="text"
+                name="name"
+                required
+                minLength="1"
+                maxLength="50"
+                value={formData.name}
+                onChange={handleInputChange}
+              />
+            </div>
           </div>
 
           {formData.userType === "restaurant" && (
@@ -132,12 +134,14 @@ const UpdateProfile = () => {
           )}
           <div>
             <label htmlFor="location">Location:</label>
-            <input
-              type="text"
-              name="location"
-              value={formData.location}
-              onChange={handleInputChange}
-            />
+            <div className="short-answer">
+              <input
+                type="text"
+                name="location"
+                value={formData.location}
+                onChange={handleInputChange}
+              />
+            </div>
           </div>
           <br />
           <div>
@@ -158,6 +162,7 @@ const UpdateProfile = () => {
               onChange={handleInputChange}
             />
           </div>
+          <br/>
           <button type="submit" className="Gen-Button">
             UPDATE
           </button>

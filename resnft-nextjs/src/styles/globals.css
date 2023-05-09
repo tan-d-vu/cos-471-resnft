@@ -382,3 +382,8 @@ label {
 .Select-option {
   width: 30%;
 }
+
+.short-answer{
+  width: 50%;
+  padding-left: 24%;
+}

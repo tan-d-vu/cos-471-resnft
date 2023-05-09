@@ -71,36 +71,38 @@ const UserProfile = ({ reservations }) => {
 
   return (
     <div>
-      <h1>Reservation List</h1>
-      <form>
-        <label htmlFor="date">Date:</label>
-        <input
-          type="date"
-          id="date"
-          min={DateTime.now().toISODate()}
-          value={searchDate}
-          onChange={handleDateChange}
-        />
+      <div className="Update-description">
+        <h1>Reservation List</h1>
+        <form>
+          <label htmlFor="date">Date:</label>
+          <input
+            type="date"
+            id="date"
+            min={DateTime.now().toISODate()}
+            value={searchDate}
+            onChange={handleDateChange}
+          />
 
-        <label htmlFor="time">Time:</label>
-        <input
-          type="time"
-          id="time"
-          value={searchTime}
-          onChange={handleTimeChange}
-        />
-      </form>
+          <label htmlFor="time">Time:</label>
+          <input
+            type="time"
+            id="time"
+            value={searchTime}
+            onChange={handleTimeChange}
+          />
+        </form>
 
-      <h2>Available Time Slots:</h2>
-      {availableTimeSlots.length > 0 ? (
-        <>
-          {availableTimeSlots.map((reservation) => (
-            <ReservationModal reservation={reservation} />
-          ))}
-        </>
-      ) : (
-        <p>No available time slots for selected date and time.</p>
-      )}
+        <h2>Available Time Slots:</h2>
+        {availableTimeSlots.length > 0 ? (
+          <>
+            {availableTimeSlots.map((reservation) => (
+              <ReservationModal reservation={reservation} />
+            ))}
+          </>
+        ) : (
+          <p>No available time slots for selected date and time.</p>
+        )}
+      </div>
     </div>
   );
 };
