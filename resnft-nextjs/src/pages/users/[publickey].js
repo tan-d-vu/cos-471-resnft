@@ -35,7 +35,7 @@ const UserProfile = () => {
   return (
     <div className="user-profile">
       <div className="center-page-title">
-        <h1>Your Profile</h1>
+        <h1>User Profile</h1>
       </div>
       <h2>Public Key: {profile.pubKey}</h2>
       <br />
@@ -59,7 +59,7 @@ const UserProfile = () => {
       )}
 
       <h2>
-        Your NFTs: <GetNFTByOwner addr={profile.pubKey} />
+       NFTs Owned: <GetNFTByOwner addr={profile.pubKey} />
       </h2>
     </div>
   );

@@ -84,7 +84,7 @@ const GetNFTByOwner = ({ addr }) => {
 
   return (
     <div className="reservation-list">
-      You own {nfts ? nfts.length : 0} NFTs!
+      Count: {nfts ? nfts.length : 0}
       <br />
       {nfts
         ? nfts.map((nft, index) => (

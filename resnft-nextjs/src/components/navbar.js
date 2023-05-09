@@ -11,11 +11,6 @@ function Navbar() {
 
   const router = useRouter();
 
-  const handleLogin = () => {
-    fcl.authenticate();
-    fcl.currentUser().subscribe(setUser);
-  };
-
   useEffect(() => {
     if (!(!user || !user.addr)) {
       fetchProfile({ addr: user.addr }).then((data) => {
@@ -26,13 +21,6 @@ function Navbar() {
       router.push(`/users/${encodeURIComponent(user.addr)}`);
     }
   }, [user]);
-
-  const logout = () => {
-    fcl.unauthenticate();
-    setUser(null);
-    setProfile(null);
-    router.push("/");
-  };
 
   return (
     <div className="nav">
@@ -63,16 +51,23 @@ function Navbar() {
                 </Link>
                 <Link href="/users/update-profile">Update Profile</Link>
                 {/* <Link href="/mint">Mint NFT</Link> */}
-                <Link
-                  href={`/restaurants/allReservations/${encodeURIComponent(
-                    user.addr
-                  )}`}
-                >
-                  Reservations
-                </Link>
-                <Link href="/restaurants/populate-reservations">
-                  Populate Reservations
-                </Link>
+
+                {profile && profile.isRestaurant ? (
+                  <>
+                    <Link
+                      href={`/restaurants/allReservations/${encodeURIComponent(
+                        user.addr
+                      )}`}
+                    >
+                      Reservations
+                    </Link>
+                    <Link href="/restaurants/populate-reservations">
+                      Populate Reservations
+                    </Link>
+                  </>
+                ) : (
+                  ""
+                )}
               </>
             ) : (
               <Link href="/login">Login</Link>
@@ -117,7 +112,7 @@ function Navbar() {
           )}
         </div> */}
         {/* <h1 className="SiteName"> Flow NFT </h1> */}
-        <img src="/Logo.png" alt="logo" className="Nav-logo"/>
+        <img src="/Logo.png" alt="logo" className="Nav-logo" />
       </div>
     </div>
   );
