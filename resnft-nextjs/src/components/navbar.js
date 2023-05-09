@@ -62,16 +62,16 @@ function Navbar() {
                   Profile
                 </Link>
                 <Link href="/users/update-profile">Update Profile</Link>
-                <Link href="/mint">Mint NFT</Link>
-                <Link href="/restaurants/populate-reservations">
-                  Populate Reservations
-                </Link>
+                {/* <Link href="/mint">Mint NFT</Link> */}
                 <Link
                   href={`/restaurants/allReservations/${encodeURIComponent(
                     user.addr
                   )}`}
                 >
                   Reservations
+                </Link>
+                <Link href="/restaurants/populate-reservations">
+                  Populate Reservations
                 </Link>
               </>
             ) : (
