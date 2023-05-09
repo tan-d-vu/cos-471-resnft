@@ -58,46 +58,48 @@ const ShowReservationToBook = ({ reservation }) => {
   // keys {id, content, restaurantID, datetime, isAvailable, nft})
   return (
     <>
-    <div className="Update-description">
-      
-      {DateTime.fromISO(reservation.datetime).toLocaleString(
-              DateTime.DATE_SIMPLE
-            )}
-      <br/>
-      {DateTime.fromISO(reservation.datetime).toLocaleString(
-              DateTime.TIME_SIMPLE
-            )}
-
-      <br />
-      {reservation.nft}
-      <br />
-      {reservation.content}
-      <br />
-      {reservation.restaurantID}
-      <br /> <br/>
-      Price: ${salePrice}
-      <br /> <br/>
-      <>
-        {reservation.isAvailable ? (
-          <>
-            {!user || !user.addr ? (
-              <>Log in to book this reservation</>
-            ) : (
-              <>
-                {user.addr != reservation.restaurantID ? (
-                  <>
-                    <button className="Gen-Button" onClick={() => handlePurchase()}>Purchase</button>
-                  </>
-                ) : (
-                  <>You own this reservation</>
-                )}
-              </>
-            )}
-          </>
-        ) : (
-          <>This reservation is not available</>
+      <div className="Update-description">
+        Reservation NFT ID: {reservation.nft}
+        <br/>
+        Restaurant: {reservation.restaurantID}
+        <br />
+        at
+        <br />
+        {DateTime.fromISO(reservation.datetime).toLocaleString(
+          DateTime.DATETIME_FULL
         )}
-      </>
+        <br />
+        <br />
+        <pre>{reservation.content}</pre>
+        <br /> <br />
+        Price: ${salePrice}
+        <br /> <br />
+        <>
+          {reservation.isAvailable ? (
+            <>
+              {!user || !user.addr ? (
+                <>Log in to book this reservation</>
+              ) : (
+                <>
+                  {user.addr != reservation.restaurantID ? (
+                    <>
+                      <button
+                        className="Gen-Button"
+                        onClick={() => handlePurchase()}
+                      >
+                        Purchase
+                      </button>
+                    </>
+                  ) : (
+                    <>You own this reservation</>
+                  )}
+                </>
+              )}
+            </>
+          ) : (
+            <>This reservation is not available</>
+          )}
+        </>
       </div>
     </>
   );
