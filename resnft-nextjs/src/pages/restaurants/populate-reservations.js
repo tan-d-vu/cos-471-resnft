@@ -27,7 +27,9 @@ const RestaurantCreateManyReservations = () => {
   if (!user || !user.addr) {
     return (
       <div className="update-profile">
-        <h2> Please Sign In to Create Reservations</h2>
+        <div className="Update-description">
+          <h2> Please Sign In to Create Reservations</h2>
+        </div>
       </div>
     );
   } else {
@@ -36,7 +38,9 @@ const RestaurantCreateManyReservations = () => {
     } else {
       return (
         <div className="update-profile">
-          <h2> Only restaurants can create reservations.</h2>
+          <div className="Update-description">
+            <h2> Only restaurants can create reservations.</h2>
+          </div>
         </div>
       );
     }
