@@ -12,11 +12,12 @@ const ReservationModal = ({ reservation }) => {
 
   return (
     <div>
-      <button onClick={handleShow}>
+      <button onClick={handleShow} className="Gen-Button">
         {DateTime.fromISO(reservation.datetime).toLocaleString(
           DateTime.TIME_SIMPLE
         )}
       </button>
+      <br/><br/>
       <Modal
         isOpen={showModal}
         onRequestClose={handleClose}

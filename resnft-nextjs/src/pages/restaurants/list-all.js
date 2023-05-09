@@ -17,14 +17,16 @@ const ListAllRestaurants = () => {
 
   return (
     <>
-      {restaurants
-        ? restaurants.users.map((restaurant) => (
-            <Link href={`/restaurants/allReservations/${restaurant.pubKey}`}>
-              {restaurant.name}
-              <br />
-            </Link>
-          ))
-        : ""}
+      <div className="Update-description">
+        {restaurants
+          ? restaurants.users.map((restaurant) => (
+              <Link href={`/restaurants/allReservations/${restaurant.pubKey}`}>
+                {restaurant.name}
+                <br />
+              </Link>
+            ))
+          : ""}
+      </div>
     </>
   );
 };

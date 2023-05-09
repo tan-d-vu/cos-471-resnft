@@ -37,10 +37,10 @@ function Index() {
               <div className="Section-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" height="148" viewBox="0 96 960 960" width="148"><path fill="currentColor" d="M361 735q-17 0-28.5-11.428T321 695.25v-79.5q16 0 28-11.428T361 576q0-16.894-12-28.322t-28-11.428v-79.5q0-16.894 11.5-28.322T361 417h238q17 0 28.5 11.428T639 456.75v79.5q-16 0-28 11.428T599 576q0 16.894 12 28.322t28 11.428v79.5q0 16.894-11.5 28.322T599 735H361Zm119-60q8 0 14-5.5t6-14.5q0-8-6-13.5t-14-5.5q-8 0-14 5.5t-6 13.5q0 9 6 14.5t14 5.5Zm0-79q8 0 14-6t6-14q0-8-6-14t-14-6q-8 0-14 6t-6 14q0 8 6 14t14 6Zm0-80q8 0 14-5.5t6-13.5q0-9-6-14.5t-14-5.5q-8 0-14 5.5t-6 14.5q0 8 6 13.5t14 5.5Zm-209 523q-39 0-66.5-27.5T177 945V207q0-39 27.5-66.5T271 113h418q39 0 66.5 27.5T783 207v738q0 39-27.5 66.5T689 1039H271Zm0-184h418V297H271v558Z"/></svg>
               </div>
-              View existing reservations:
+              View existing restaurants:
               <br/><br/>
               <button className="Gen-Button">
-                <Link href="/restaurants/allReservations/[reservationID].js">VIEW</Link>
+                <Link href="/restaurants/list-all">VIEW</Link>
               </button>
             </div>
           </div>
