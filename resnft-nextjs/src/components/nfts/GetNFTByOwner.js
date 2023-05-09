@@ -8,21 +8,26 @@ const GetNFTByOwner = ({ addr }) => {
   const [nfts, setNfts] = useState(null);
 
   useEffect(() => {
+    console.log(addr);
     const fetchNFT = async ({ addr }) => {
-      const response = await fcl.send([
-        fcl.script(getData),
-        fcl.args([fcl.arg(addr, fcl.t.Address)]),
-      ]);
-      const data = await fcl.decode(response);
-      setNfts(data);
+      return await fcl
+        .send([fcl.script(getData), fcl.args([fcl.arg(addr, fcl.t.Address)])])
+        .then((response) => {
+          return fcl.decode(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     };
+
     if (addr) {
-      fetchNFT({ addr });
+      fetchNFT({ addr }).then((data) => {
+        setNfts(data);
+      });
     }
   }, [addr]);
 
   useEffect(() => {
-    console.log(nfts);
     if (nfts) {
       setReservationNFTs({ addr: addr, nfts: nfts }).then((data) => {
         if (data) {

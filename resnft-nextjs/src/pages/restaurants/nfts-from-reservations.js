@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import { useAuthContext, useProfileContext } from "../../contexts/AuthContext";
 import { useRouter } from "next/router";
 import { useNewReservationsContext } from "@/contexts/CreateNewReservationsContext";
-
+import { setReservationNFTs } from "@/utils/utils";
+import { getData } from "@/cadence/scripts/getData";
 import * as fcl from "@onflow/fcl";
 
 function transformArray(arr) {
@@ -40,12 +41,6 @@ const NFTsFromReservations = () => {
     return Array.from({ length }, () => elem);
   }
 
-  console.log(mintNameArray);
-  console.log(mintDataArray);
-  console.log(mintBondArray);
-  console.log(mintRoyaltiesArray);
-  console.log(priceArray);
-
   const authz = fcl.currentUser().authorization;
 
   const mintAndCreateSale = async () => {
@@ -64,13 +59,41 @@ const NFTsFromReservations = () => {
         fcl.authorizations([authz]),
         fcl.limit(9999),
       ])
-      .then(fcl.decode)
+      .then((res) => {
+        return fcl.decode(res);
+      })
       .then((res) => {
         console.log(res);
-        setReservationsCreated([]);
-      })
-      .then(() => {
-        router.push(`/restaurants/allReservations/${encodeURIComponent(user.addr)}`);
+        fcl
+          .tx(res)
+          .onceSealed()
+          .then(() => {
+            fcl
+              .send([
+                fcl.script(getData),
+                fcl.args([fcl.arg(user.addr, fcl.t.Address)]),
+              ])
+              .then((response) => {
+                return fcl.decode(response);
+              })
+              .then((data) => {
+                setReservationNFTs({ addr: user.addr, nfts: data }).then(
+                  (data) => {
+                    if (data) {
+                      console.log(data);
+                    }
+                  }
+                );
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          })
+          .then(() => {
+            router.push(
+              `/restaurants/allReservations/${encodeURIComponent(user.addr)}`
+            );
+          });
       });
   };
 

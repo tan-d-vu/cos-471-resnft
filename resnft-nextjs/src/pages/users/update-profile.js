@@ -11,17 +11,14 @@ const UpdateProfile = () => {
   const router = useRouter();
 
   const setupAccount = async () => {
-    const transactionID = await fcl
-      .send([
-        fcl.transaction(setup),
-        fcl.args(),
-        fcl.payer(fcl.authz),
-        fcl.proposer(fcl.authz),
-        fcl.authorizations([fcl.authz]),
-        fcl.limit(9999),
-      ])
-      .then(fcl.decode);
-    console.log(transactionID);
+    return await fcl.send([
+      fcl.transaction(setup),
+      fcl.args(),
+      fcl.payer(fcl.authz),
+      fcl.proposer(fcl.authz),
+      fcl.authorizations([fcl.authz]),
+      fcl.limit(9999),
+    ]);
   };
 
   const [formData, setFormData] = useState({
@@ -66,12 +63,22 @@ const UpdateProfile = () => {
       .then((data) => {
         setProfile(data.user);
       })
-      .then(() => {
-        router.push(`/users/${encodeURIComponent(user.addr)}`);
-      })
       .catch((error) => console.error(error));
 
-      setupAccount();
+    setupAccount()
+      .then((res) => {
+        return fcl.decode(res);
+      })
+      .then((res) => {
+        console.log(res);
+        fcl
+          .tx(res)
+          .onceSealed()
+          .then(() => {
+            router.push(`/users/${encodeURIComponent(user.addr)}`);
+          });
+      })
+      .catch((error) => console.error(error));
   };
 
   return (

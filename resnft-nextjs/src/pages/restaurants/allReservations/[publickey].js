@@ -26,7 +26,6 @@ const ReservationModal = ({ reservation }) => {
         <br />
         {reservation.nft}
 
-
         <button onClick={handleClose}>close</button>
         <Link
           href={`/restaurants/reservations/${encodeURIComponent(

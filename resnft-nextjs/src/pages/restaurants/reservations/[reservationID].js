@@ -38,7 +38,9 @@ const ShowReservationToBook = ({ reservation }) => {
   };
 
   const handlePurchase = async () => {
-    await purchase(user.addr, reservation.nft, salePrice);
+    const buyerAddr = user.addr;
+    const tokenID = reservation.nft;
+    await purchase({buyerAddr, tokenID, salePrice});
   };
 
   console.log(reservation);
@@ -92,8 +94,6 @@ export async function getServerSideProps(context) {
       id: reservationID,
     },
   });
-
-  console.log(reservation);
 
   return {
     props: { reservation: reservation },
