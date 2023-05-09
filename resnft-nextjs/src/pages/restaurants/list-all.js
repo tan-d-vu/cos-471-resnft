@@ -18,12 +18,19 @@ const ListAllRestaurants = () => {
   return (
     <>
       <div className="Update-description">
+        Reservations are aviable at the following restaurants:
+        <br/><br/>
         {restaurants
           ? restaurants.users.map((restaurant) => (
-              <Link href={`/restaurants/allReservations/${restaurant.pubKey}`}>
-                {restaurant.name}
-                <br />
-              </Link>
+            <div>
+              <button className="Gen-Button">
+                <Link href={`/restaurants/allReservations/${restaurant.pubKey}`}>
+                  {restaurant.name}
+                  <br />
+                </Link>
+              </button>
+              <br/>
+            </div>
             ))
           : ""}
       </div>

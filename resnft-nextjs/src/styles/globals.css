@@ -50,6 +50,24 @@ body {
   color: #61dafb;
 }
 
+.modal-window {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  
+}
+
+.my-modal {
+  width: 30%;
+  min-width: 350px;
+  height: 400px;
+  margin-left: 35%;
+  margin-top: 12%;
+  padding-top: 1px;
+  background-color: white;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+} 
+
 input[type=text], select, textarea {
   width: 100%;
   padding: 12px;
@@ -76,9 +94,19 @@ label {
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   color: #f9f9f9;
 }
+
 .Gen-Button a {
   color: #f9f9f9;
   text-decoration: none;
+}
+
+.Close-Button {
+  padding: 0px 16px;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border-radius: 18px;
+  border: none;
 }
 
 .Log-Button{
@@ -390,3 +418,5 @@ label {
   width: 50%;
   padding-left: 24%;
 }
+
+
