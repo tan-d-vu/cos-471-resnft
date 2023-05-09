@@ -23,18 +23,31 @@ const ReservationModal = ({ reservation }) => {
         onRequestClose={handleClose}
         contentLabel="Reservation Modal"
       >
-        {reservation.datetime}
-        <br />
-        {reservation.nft}
+        <div className="Update-description">
+          {/* {reservation.datetime} */}
+          Confirm reservation for:
+          <br />
+          {reservation.nft}
+          {DateTime.fromISO(reservation.datetime).toLocaleString(
+            DateTime.DATE_SIMPLE
+          )}
+          <br/>
+          {DateTime.fromISO(reservation.datetime).toLocaleString(
+            DateTime.TIME_SIMPLE
+          )}
+          <br />
 
-        <button onClick={handleClose}>close</button>
-        <Link
-          href={`/restaurants/reservations/${encodeURIComponent(
-            reservation.id
-          )}`}
-        >
-          Book
-        </Link>
+          <button onClick={handleClose}>close</button>
+          <button className="Gen-Button">
+            <Link
+              href={`/restaurants/reservations/${encodeURIComponent(
+                reservation.id
+              )}`}
+            >
+              Book
+            </Link>
+          </button>
+        </div>
       </Modal>
     </div>
   );
