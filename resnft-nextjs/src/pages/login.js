@@ -26,21 +26,22 @@ const Login = () => {
   }, [user]);
 
   return (
-    <div className="flex-1">
-      <div className="Log-content">
-        <div className="Description">
-          In order to use our platform, you must connect a crypto wallet. You
-          can log in here.
+    <div className="flex-1 place-self-center" id="login-page">
+      <div className="text-center">
+        <div id="login-description" className="text-xl">
+          In order to use our platform, you must connect a crypto wallet.
         </div>
-        <div className="Log-btn-container">
+        <div id="login-btn">
           {!user || !user.addr ? (
             <>
-              <button onClick={handleLogin} className="Log-Button">
+              <button onClick={handleLogin} className="px-4 py-2 mt-3 text-white rounded-lg bg-green hover:bg-dark-green">
                 CONNECT WALLET
               </button>
             </>
           ) : (
-            ""
+            <div>
+            <meta http-equiv="refresh" content="0; /home" />
+          </div>
           )}
         </div>
       </div>
