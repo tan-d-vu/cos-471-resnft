@@ -22,100 +22,87 @@ function Navbar() {
     }
   }, [user]);
 
-  return (
-    <div className="nav">
-      <div className="navbar">
-        <div className="dropdown">
-          <button className="dropbtn">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              height="48"
-              viewBox="0 96 960 960"
-              width="48"
-            >
-              <path
-                fill="currentColor"
-                d="M115.935 822.696v-68.131h728.13v68.131h-728.13Zm0-212.631v-68.13h728.13v68.13h-728.13Zm0-212.63v-68.37h728.13v68.37h-728.13Z"
-              />
-            </svg>
-            <i className="fa fa-caret-down"></i>
-          </button>
-          <div className="dropdown-content">
-            <Link href="/home">Home</Link>
-            <Link href="/restaurants/list-all">Discover Restaurants</Link>
+  const navlinkStyle = "block p-4 z-1 hover:bg-slate-200";
 
-            {user && user.addr ? (
-              <>
-                <Link href={`/users/${encodeURIComponent(user.addr)}`}>
-                  Profile
-                </Link>
-                <Link href="/users/update-profile">Update Profile</Link>
-                {/* <Link href="/mint">Mint NFT</Link> */}
+  const navbar = (
+    <div id="navbar" className="flex justify-between bg-green">
+      <div className="relative inline-block group" id="dropdown">
+        <button class="text-white p-4">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="48"
+            viewBox="0 96 960 960"
+            width="48"
+          >
+            <path
+              fill="currentColor"
+              d="M115.935 822.696v-68.131h728.13v68.131h-728.13Zm0-212.631v-68.13h728.13v68.13h-728.13Zm0-212.63v-68.37h728.13v68.37h-728.13Z"
+            />
+          </svg>
+        </button>
 
-                {profile && profile.isRestaurant ? (
-                  <>
-                    <Link
-                      href={`/restaurants/allReservations/${encodeURIComponent(
-                        user.addr
-                      )}`}
-                    >
-                      Reservations
-                    </Link>
-                    <Link href="/restaurants/populate-reservations">
-                      Populate Reservations
-                    </Link>
-                  </>
-                ) : (
-                  ""
-                )}
-              </>
-            ) : (
-              <Link href="/login">Login</Link>
-            )}
-
-            <Link href="/about">About</Link>
-          </div>
-        </div>
-        {/* <div className="Nav-Btns">
-          {!user || !user.addr ? (
-            <>
-              <button onClick={handleLogin} className="Nav-Button">
-                <h2>Login</h2>
-              </button>
-            </>
-          ) : (
-            ""
-          )}
+        <div
+          className="absolute hidden text-xl text-left text-black bg-white group-hover:block whitespace-nowrap"
+          id="nav-content"
+        >
+          <Link className={navlinkStyle} href="/home">
+            Home
+          </Link>
+          <Link className={navlinkStyle} href="/restaurants/list-all">
+            Discover Restaurants
+          </Link>
 
           {user && user.addr ? (
             <>
-              <button className="Nav-Button">
-                <h2>
-                  <Link href={`/users/${encodeURIComponent(user.addr)}`}>
-                    Profile
+              <Link
+                className={navlinkStyle}
+                href={`/users/${encodeURIComponent(user.addr)}`}
+              >
+                Profile
+              </Link>
+              <Link className={navlinkStyle} href="/users/update-profile">
+                Update Profile
+              </Link>
+
+              {profile && profile.isRestaurant ? (
+                <>
+                  <Link
+                    className={navlinkStyle}
+                    href={`/restaurants/allReservations/${encodeURIComponent(
+                      user.addr
+                    )}`}
+                  >
+                    Reservations
                   </Link>
-                </h2>
-              </button>
-
-              <button className="Nav-Button">
-                <h2>
-                  <Link href="/users/update-profile">Update Profile</Link>
-                </h2>
-              </button>
-
-              <button onClick={logout} className="Nav-Button">
-                <h2>Logout</h2>
-              </button>
+                  <Link
+                    className={navlinkStyle}
+                    href="/restaurants/populate-reservations"
+                  >
+                    Populate Reservations
+                  </Link>
+                </>
+              ) : (
+                ""
+              )}
             </>
           ) : (
-            ""
+            <Link className={navlinkStyle} href="/login">
+              Login
+            </Link>
           )}
-        </div> */}
-        {/* <h1 className="SiteName"> Flow NFT </h1> */}
-        <img src="/Logo.png" alt="logo" className="Nav-logo" />
+
+          <Link className={navlinkStyle} href="/about">
+            About
+          </Link>
+        </div>
+      </div>
+      <div className="p-3 h-[80px]" id="nav-logo">
+        <img src="/Logo.png" className="max-h-full" alt="logo" />
       </div>
     </div>
   );
+
+  return navbar;
 }
 
 export default Navbar;
