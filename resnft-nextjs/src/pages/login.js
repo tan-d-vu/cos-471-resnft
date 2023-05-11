@@ -26,7 +26,7 @@ const Login = () => {
   }, [user]);
 
   return (
-    <div className="Login">
+    <div className="flex-1">
       <div className="Log-content">
         <div className="Description">
           In order to use our platform, you must connect a crypto wallet. You
