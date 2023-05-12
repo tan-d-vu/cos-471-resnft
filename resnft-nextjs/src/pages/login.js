@@ -19,30 +19,27 @@ const Login = () => {
   useEffect(() => {
     if (!(!user || !user.addr)) {
       fetchProfile({ addr: user.addr }).then((data) => {
-          setProfile(data.user);
+        setProfile(data.user);
       });
       router.push(`/users/${encodeURIComponent(user.addr)}`);
     }
   }, [user]);
 
   return (
-    <div className="flex-1 place-self-center" id="login-page">
-      <div className="text-center">
-        <div id="login-description" className="text-xl">
-          In order to use our platform, you must connect a crypto wallet.
-        </div>
-        <div id="login-btn">
-          {!user || !user.addr ? (
-            <>
-              <button onClick={handleLogin} className="px-4 py-2 mt-3 text-white rounded-lg bg-green hover:bg-dark-green">
-                CONNECT WALLET
-              </button>
-            </>
-          ) : (
-            <div>
-            <meta http-equiv="refresh" content="0; /home" />
+    <div className="flex flex-1" id="login-page">
+      <div className="flex-1 place-self-center" id="login-content">
+        <div className="text-center">
+          <div id="login-description" className="text-xl">
+            In order to use our platform, you must connect a crypto wallet.
           </div>
-          )}
+          <div id="login-btn">
+            <button
+              onClick={handleLogin}
+              className="px-4 py-2 mt-3 text-white rounded-lg bg-green hover:bg-dark-green"
+            >
+              CONNECT WALLET
+            </button>
+          </div>
         </div>
       </div>
     </div>

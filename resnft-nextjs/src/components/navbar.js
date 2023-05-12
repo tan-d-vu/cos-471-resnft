@@ -27,7 +27,7 @@ function Navbar() {
   const navbar = (
     <div id="navbar" className="flex justify-between bg-green">
       <div className="relative inline-block group" id="dropdown">
-        <button class="text-white p-4">
+        <button className="p-4 text-white">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="48"
