@@ -5,22 +5,13 @@ import { useRouter } from "next/router";
 import * as fcl from "@onflow/fcl";
 import { setup } from "../../cadence/transactions/setup.js";
 import { Input, Select } from "@/components/Form.js";
+import { LoadingModal } from "@/components/LoadingModal.js";
 
 const UpdateProfile = () => {
   const { user, _ } = useAuthContext();
   const { profile, setProfile } = useProfileContext();
+  const [isWaiting, setIsWaiting] = useState(false);
   const router = useRouter();
-
-  const setupAccount = async () => {
-    return await fcl.send([
-      fcl.transaction(setup),
-      fcl.args(),
-      fcl.payer(fcl.authz),
-      fcl.proposer(fcl.authz),
-      fcl.authorizations([fcl.authz]),
-      fcl.limit(9999),
-    ]);
-  };
 
   const [formData, setFormData] = useState({
     userType: profile && profile.isRestaurant ? "restaurant" : "customer",
@@ -51,6 +42,18 @@ const UpdateProfile = () => {
     }));
   };
 
+  const setupAccount = async () => {
+    setIsWaiting(true);
+    return await fcl.send([
+      fcl.transaction(setup),
+      fcl.args(),
+      fcl.payer(fcl.authz),
+      fcl.proposer(fcl.authz),
+      fcl.authorizations([fcl.authz]),
+      fcl.limit(9999),
+    ]);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     fetch("/api/users/update", {
@@ -67,19 +70,15 @@ const UpdateProfile = () => {
       .catch((error) => console.error(error));
 
     setupAccount()
-      .then((res) => {
-        return fcl.decode(res);
-      })
+      .then((res) => fcl.decode(res))
       .then((res) => {
         console.log(res);
         fcl
           .tx(res)
           .onceSealed()
-          .then(() => {
-            router.push(`/users/${encodeURIComponent(user.addr)}`);
-          });
-      })
-      .catch((error) => console.error(error));
+          .catch((error) => console.error(error))
+          .then(() => router.push(`/users/${encodeURIComponent(user.addr)}`));
+      });
   };
 
   const updateForm = (
@@ -87,6 +86,8 @@ const UpdateProfile = () => {
       <div className="text-3xl self-center max-w-lg text-center pt-6 pb-6">
         <p>Update Profile</p>
       </div>
+
+      {isWaiting ? <LoadingModal msg="Processing Update..." /> : ""}
 
       <div className="flex flex-1 justify-center">
         <form className="flex-1 max-w-lg" onSubmit={handleSubmit}>
