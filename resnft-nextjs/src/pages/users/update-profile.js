@@ -49,7 +49,6 @@ const UpdateProfile = () => {
       ...prevState,
       [name]: value,
     }));
-    console.log(formData);
   };
 
   const handleSubmit = (e) => {

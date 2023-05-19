@@ -29,8 +29,6 @@ module.exports = {
       maxWidth: ratio,
       maxHeight: ratio,
       minHeight: ratio,
-      width: ratio,
-      height: ratio,
     },
   },
   plugins: [

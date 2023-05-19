@@ -21,7 +21,8 @@ const RestaurantListItem = ({ restaurant, style }) => {
         >
           <path d="M565.6 36.2C572.1 40.7 576 48.1 576 56V392c0 10-6.2 18.9-15.5 22.4l-168 64c-5.2 2-10.9 2.1-16.1 .3L192.5 417.5l-160 61c-7.4 2.8-15.7 1.8-22.2-2.7S0 463.9 0 456V120c0-10 6.1-18.9 15.5-22.4l168-64c5.2-2 10.9-2.1 16.1-.3L383.5 94.5l160-61c7.4-2.8 15.7-1.8 22.2 2.7zM48 136.5V421.2l120-45.7V90.8L48 136.5zM360 422.7V137.3l-144-48V374.7l144 48zm48-1.5l120-45.7V90.8L408 136.5V421.2z" />
         </svg>
-        {restaurant.location}      </p>
+        {restaurant.location}{" "}
+      </p>
     </div>
   );
 };
@@ -38,20 +39,24 @@ const ListAllRestaurants = () => {
   }, []);
 
   const restaurantList = (
-    <div className="flex flex-1 flex-col place-items-center" id="restaurant-list">
+    <div
+      className="flex flex-1 flex-col place-items-center"
+      id="restaurant-list"
+    >
       <div className="text-4xl max-w-60 text-center pt-10 pb-6">
         <p>Discover reservations at our participating restaurants.</p>
       </div>
 
-      <div className="flex flex-col border-2 border-b-0 rounded-xl bg-light-green">
+      <div className="min-w-max	w-96">
         {restaurants
           ? restaurants.users.map((restaurant, index) => (
               <>
                 {index == 0 ? (
                   <RestaurantListItem
                     restaurant={restaurant}
-                    style="py-3 px-4 border-b-2 hover:bg-green rounded-t-xl"
+                    style="py-3 px-4 border-b-2  bg-light-green hover:bg-green rounded-t-xl"
                   />
+                  
                 ) : (
                   ""
                 )}
@@ -59,7 +64,7 @@ const ListAllRestaurants = () => {
                 {index != 0 && index != restaurants.users.length - 1 ? (
                   <RestaurantListItem
                     restaurant={restaurant}
-                    style="py-3 px-4 border-b-2 hover:bg-dark-green"
+                    style="py-3 px-4 border-b-2 bg-light-green hover:bg-dark-green"
                   />
                 ) : (
                   ""
@@ -68,7 +73,7 @@ const ListAllRestaurants = () => {
                 {index == restaurants.users.length - 1 ? (
                   <RestaurantListItem
                     restaurant={restaurant}
-                    style="py-3 px-4 border-b-2 hover:bg-dark-green rounded-b-xl"
+                    style="py-3 px-4 border-b-2 bg-light-green hover:bg-dark-green rounded-b-xl"
                   />
                 ) : (
                   ""
