@@ -33,5 +33,7 @@ module.exports = {
       height: ratio,
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms'),
+  ],
 };

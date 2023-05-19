@@ -4,6 +4,7 @@ import { useAuthContext, useProfileContext } from "@/contexts/AuthContext";
 import { useRouter } from "next/router";
 import * as fcl from "@onflow/fcl";
 import { setup } from "../../cadence/transactions/setup.js";
+import { Input, Select } from "@/components/Form.js";
 
 const UpdateProfile = () => {
   const { user, _ } = useAuthContext();
@@ -22,13 +23,13 @@ const UpdateProfile = () => {
   };
 
   const [formData, setFormData] = useState({
-    userType: "customer",
-    name: "",
-    email: "",
-    phone: "",
-    location: "",
-    menu: "",
-    description: "",
+    userType: profile && profile.isRestaurant ? "restaurant" : "customer",
+    name: profile && profile.name ? profile.name : "",
+    email: profile && profile.email ? profile.email : "",
+    phone: profile && profile.phone ? profile.phone : "",
+    location: profile && profile.location ? profile.location : "",
+    menu: profile && profile.menu ? profile.menu : "",
+    description: profile && profile.description ? profile.description : "",
     pubKey: "",
   });
 
@@ -48,6 +49,7 @@ const UpdateProfile = () => {
       ...prevState,
       [name]: value,
     }));
+    console.log(formData);
   };
 
   const handleSubmit = (e) => {
@@ -81,106 +83,88 @@ const UpdateProfile = () => {
       .catch((error) => console.error(error));
   };
 
-  return (
-    <div className="update-profile">
-      <div className="center-page-title">
-        <h2> Update Your Profile </h2>
+  const updateForm = (
+    <div className="flex flex-1 flex-col">
+      <div className="text-3xl self-center max-w-lg text-center pt-6 pb-6">
+        <p>Update Profile</p>
       </div>
-      <form onSubmit={handleSubmit}>
-        <div className="Update-form">
-          <div>
-            <label htmlFor="userType">I am a: </label>
-            <select
-              name="userType"
-              value={formData.userType}
-              onChange={handleInputChange}
-              className="Select-option"
-            >
-              <option value="customer">Customer</option>
-              <option value="restaurant">Restaurant</option>
-            </select>
-          </div>
-          <div>
-            <label htmlFor="name">Name:</label>
-            <div className="short-answer">
-              <input
-                type="text"
-                name="name"
-                required
-                minLength="1"
-                maxLength="50"
-                value={formData.name}
-                onChange={handleInputChange}
-              />
-            </div>
-          </div>
 
+      <div className="flex flex-1 justify-center">
+        <form className="flex-1 max-w-lg" onSubmit={handleSubmit}>
+          <Select
+            label="I am a:"
+            name="userType"
+            onChange={handleInputChange}
+            value={formData.userType}
+            options={[
+              { label: "Customer", value: "customer" },
+              { label: "Restaurant", value: "restaurant" },
+            ]}
+          />
+          <Input
+            elementType="input"
+            label="Name"
+            name="name"
+            type="text"
+            onChange={handleInputChange}
+            value={formData.name}
+          />
+          <Input
+            elementType="input"
+            type="email"
+            label="Email"
+            name="email"
+            onChange={handleInputChange}
+            value={formData.email}
+          />
+          <Input
+            elementType="input"
+            type="tel"
+            label="Phone"
+            name="phone"
+            onChange={handleInputChange}
+            value={formData.phone}
+          />
+          <Input
+            elementType="input"
+            type="text"
+            label="Location"
+            name="location"
+            onChange={handleInputChange}
+            value={formData.location}
+          />
           {formData.userType === "restaurant" && (
             <>
-              <div>
-                <label htmlFor="menu">Menu:</label>
-                <div className="short-answer">
-                  <textarea
-                    name="menu"
-                    value={formData.menu}
-                    onChange={handleInputChange}
-                  />
-                </div>
-              </div>
-              <div>
-                <label htmlFor="description">Description:</label>
-                <div className="short-answer">
-                  <textarea
-                    name="description"
-                    value={formData.description}
-                    onChange={handleInputChange}
-                  />
-                </div>
-              </div>
+              <Input
+                elementType="textarea"
+                label="Menu"
+                name="menu"
+                onChange={handleInputChange}
+                value={formData.menu}
+              />
+              <Input
+                elementType="textarea"
+                label="Description"
+                name="description"
+                onChange={handleInputChange}
+                value={formData.description}
+              />
             </>
           )}
-          <div>
-            <label htmlFor="location">Location:</label>
-            <div className="short-answer">
-              <input
-                type="text"
-                name="location"
-                value={formData.location}
-                onChange={handleInputChange}
-              />
-            </div>
+          <div className="text-center">
+            <button
+              type="submit"
+              className="px-4 py-2 mt-3 text-white rounded-lg bg-green hover:bg-dark-green"
+            >
+              UPDATE
+            </button>
           </div>
-          <br />
-          <div>
-            <label htmlFor="email">Email:</label>
-            <div className="short-answer">
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleInputChange}
-              />
-            </div>
-          </div>
-          <div>
-            <label htmlFor="phone">Phone:</label>
-            <div className="short-answer">
-              <input
-                type="tel"
-                name="phone"
-                value={formData.phone}
-                onChange={handleInputChange}
-              />
-            </div>
-          </div>
-          <br />
-          <button type="submit" className="Gen-Button">
-            UPDATE
-          </button>
-        </div>
-      </form>{" "}
+        </form>
+      </div>
     </div>
   );
+
+  return updateForm;
 };
 
 export default UpdateProfile;

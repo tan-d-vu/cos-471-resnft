@@ -38,12 +38,12 @@ const ListAllRestaurants = () => {
   }, []);
 
   const restaurantList = (
-    <div className="flex flex-1 flex-col" id="restaurant-list">
-      <div className="text-4xl place-self-center max-w-60 text-center pt-10 pb-6">
+    <div className="flex flex-1 flex-col place-items-center" id="restaurant-list">
+      <div className="text-4xl max-w-60 text-center pt-10 pb-6">
         <p>Discover reservations at our participating restaurants.</p>
       </div>
 
-      <div className="flex flex-col place-self-center border-2 border-b-0 rounded-xl bg-light-green">
+      <div className="flex flex-col border-2 border-b-0 rounded-xl bg-light-green">
         {restaurants
           ? restaurants.users.map((restaurant, index) => (
               <>

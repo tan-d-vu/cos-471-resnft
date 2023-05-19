@@ -18,10 +18,15 @@ const Login = () => {
 
   useEffect(() => {
     if (!(!user || !user.addr)) {
-      fetchProfile({ addr: user.addr }).then((data) => {
-        setProfile(data.user);
-      });
-      router.push(`/users/${encodeURIComponent(user.addr)}`);
+      fetchProfile({ addr: user.addr })
+        .then((data) => {
+          setProfile(data.user);
+          router.push(`/users/${encodeURIComponent(user.addr)}`);
+        })
+        .catch((err) => {
+          console.log(err);
+          router.push(`/users/update-profile`);
+        });
     }
   }, [user]);
 
