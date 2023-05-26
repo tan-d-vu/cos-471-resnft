@@ -7,7 +7,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ message: "Method not allowed" });
   }
 
-  const { userType, name, email, phone, location, menu, description, pubKey } =
+  const { userType, name, email, phone, location, menu, description, pubKey, isSetup } =
     req.body;
 
   const isRestaurant = userType === "restaurant";
@@ -21,6 +21,7 @@ export default async function handler(req, res) {
     location: location,
     menu: menu,
     description: description,
+    isSetup: isSetup,
   };
 
   // Create new user

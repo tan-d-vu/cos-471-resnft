@@ -21,6 +21,7 @@ const UpdateProfile = () => {
     location: profile && profile.location ? profile.location : "",
     menu: profile && profile.menu ? profile.menu : "",
     description: profile && profile.description ? profile.description : "",
+    isSetup: profile && profile.isSetup ? profile.isSetup : false,
     pubKey: "",
   });
 
@@ -43,7 +44,6 @@ const UpdateProfile = () => {
   };
 
   const setupAccount = async () => {
-    setIsWaiting(true);
     return await fcl.send([
       fcl.transaction(setup),
       fcl.args(),
@@ -54,8 +54,7 @@ const UpdateProfile = () => {
     ]);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const updateAccount = async () => {
     fetch("/api/users/update", {
       method: "POST",
       body: JSON.stringify(formData),
@@ -67,18 +66,28 @@ const UpdateProfile = () => {
       .then((data) => {
         setProfile(data.user);
       })
+      .then(() => router.push(`/users/${encodeURIComponent(user.addr)}`))
       .catch((error) => console.error(error));
+  };
 
-    setupAccount()
-      .then((res) => fcl.decode(res))
-      .then((res) => {
-        console.log(res);
+  const handleSubmit = (e) => {
+    setIsWaiting(true);
+    e.preventDefault();
+    if (!formData.isSetup) {
+      setupAccount().then((res) => {
+        console.log("Transaction ID:" + res);
         fcl
           .tx(res)
           .onceSealed()
           .catch((error) => console.error(error))
-          .then(() => router.push(`/users/${encodeURIComponent(user.addr)}`));
+          .then(() => {
+            formData.isSetup = true;
+            updateAccount();
+          });
       });
+    } else {
+      updateAccount();
+    }
   };
 
   const updateForm = (
