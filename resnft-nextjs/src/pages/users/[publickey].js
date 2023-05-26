@@ -38,7 +38,7 @@ const UserProfile = () => {
       <div className="text-3xl max-w-lg text-center pt-6 pb-6">
         <p>{profile.name}</p>
       </div>
-      <div className="min-w-full bg-light-green border border-1 border-slate-300 rounded-md">
+      <div className="min-w-[70%] min-h-[70%] bg-light-green border border-1 border-slate-300 rounded-md">
         <TabGroup>
           <TabContent title="Profile">
             <p>Public Key: {profile.pubKey}</p>

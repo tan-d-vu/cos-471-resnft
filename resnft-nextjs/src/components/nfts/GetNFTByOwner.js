@@ -80,7 +80,7 @@ const GetNFTByOwner = ({ addr }) => {
   return (
     <>
       Count: {nfts ? nfts.length : 0}
-      <div className="grid grid-cols-9 gap-3 px-11 py-2" id="nft-list">
+      <div className="grid grid-cols-6 gap-3 px-11 py-2" id="nft-list">
         {nfts
           ? nfts.map((nft, index) => <NFTModal key={index} nft={nft} />)
           : ""}
