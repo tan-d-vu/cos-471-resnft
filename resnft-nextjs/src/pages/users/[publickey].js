@@ -3,6 +3,7 @@ import GetNFTByOwner from "../../components/nfts/GetNFTByOwner";
 import { useRouter } from "next/router";
 import { fetchProfile } from "@/utils/utils";
 import Link from "next/link";
+import { TabGroup, TabContent } from "@/components/TabGroup";
 
 const UserProfile = () => {
   const router = useRouter();
@@ -33,34 +34,33 @@ const UserProfile = () => {
   }
 
   return (
-    <div className="user-profile">
-      <div className="center-page-title">
-        <h1>User Profile</h1>
+    <div className="flex flex-1 flex-col items-center	">
+      <div className="text-3xl max-w-lg text-center pt-6 pb-6">
+        <p>{profile.name}</p>
       </div>
-      <h2>Public Key: {profile.pubKey}</h2>
-      <br />
-      <h2> Name: {profile.name} </h2>
-      <br />
-      <h2> Email: {profile.email} </h2>
-      <br />
-      <h2> Phone: {profile.phone} </h2>
-      <br />
-      <h2> Location: {profile.location} </h2>
-      <br />
-      {profile.isRestaurant ? (
-        <>
-          <h2> Menu: {profile.menu} </h2>
-          <br />
-          <h2> Description: {profile.description} </h2>
-          <br />
-        </>
-      ) : (
-        ""
-      )}
+      <div className="min-w-full bg-light-green border border-1 border-slate-300 rounded-md">
+        <TabGroup>
+          <TabContent title="Profile">
+            <p>Public Key: {profile.pubKey}</p>
+            <p> Email: {profile.email} </p>
+            <p> Phone: {profile.phone} </p>
+            <p> Location: {profile.location} </p>
+          </TabContent>
 
-      <h2>
-       NFTs Owned: <GetNFTByOwner addr={profile.pubKey} />
-      </h2>
+          <TabContent title="NFTs Owned">
+            <GetNFTByOwner addr={profile.pubKey} />
+          </TabContent>
+
+          {profile.isRestaurant ? (
+            <TabContent title="About">
+              <p>Menu: {profile.menu}</p>
+              <p>Description: {profile.description}</p>
+            </TabContent>
+          ) : (
+            ""
+          )}
+        </TabGroup>
+      </div>
     </div>
   );
 };

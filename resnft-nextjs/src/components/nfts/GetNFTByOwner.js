@@ -12,8 +12,8 @@ const NFTModal = ({ nft }) => {
 
   return (
     <>
-      <button onClick={handleShow} className="Gen-Button button-inline-block">
-      {nft.ID}
+      <button onClick={handleShow} className="bg-green py-2 rounded-xl">
+        {nft.ID}
       </button>
       <Modal
         isOpen={showModal}
@@ -34,20 +34,15 @@ const NFTModal = ({ nft }) => {
           </button>
           <h3>NFT ID: {nft.ID}</h3>
           <h3>Restaurant: {nft.Creator}</h3>
-          <h3>Reservation Information: <pre>{nft.Data}</pre></h3>
-
+          <h3>
+            Reservation Information: <pre>{nft.Data}</pre>
+          </h3>
         </div>
       </Modal>
     </>
   );
 };
 
-
-
-
-
-
-// Placeholder rn. Not actually getting NFTs by ID
 const GetNFTByOwner = ({ addr }) => {
   const [nfts, setNfts] = useState(null);
 
@@ -83,15 +78,14 @@ const GetNFTByOwner = ({ addr }) => {
   }, [nfts]);
 
   return (
-    <div className="reservation-list">
+    <>
       Count: {nfts ? nfts.length : 0}
-      <br />
-      {nfts
-        ? nfts.map((nft, index) => (
-          <NFTModal key={index} nft={nft} />
-          ))
-        : ""}
-    </div>
+      <div className="grid grid-cols-9 gap-3 px-11 py-2" id="nft-list">
+        {nfts
+          ? nfts.map((nft, index) => <NFTModal key={index} nft={nft} />)
+          : ""}
+      </div>
+    </>
   );
 };
 

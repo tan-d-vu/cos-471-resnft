@@ -26,7 +26,7 @@ module.exports = {
         "dark-green": "#8e9443",
       },
       maxWidth: ratio,
-      maxWidth: ratio,
+      minWidth: ratio,
       maxHeight: ratio,
       minHeight: ratio,
     },
