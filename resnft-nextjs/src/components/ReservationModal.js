@@ -11,7 +11,10 @@ export const ReservationModal = ({ reservation }) => {
 
   return (
     <>
-      <button onClick={handleShow} className="Gen-Button button-inline-block">
+      <button
+        onClick={handleShow}
+        className="bg-light-green py-2 rounded-xl hover:bg-dark-green hover:shadow-md"
+      >
         {DateTime.fromISO(reservation.datetime).toLocaleString(
           DateTime.TIME_SIMPLE
         )}
@@ -20,35 +23,30 @@ export const ReservationModal = ({ reservation }) => {
         isOpen={showModal}
         onRequestClose={handleClose}
         contentLabel="Reservation Modal"
-        className="my-modal modal-window"
+        className="flex flex-1 flex-col p-2 justify-center items-center border mt-4 border-1 m-auto bg-white rounded-lg shadow-lg w-96"
       >
-        <div className="modal-content">
-          <button onClick={handleClose} className="Close-Button">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              height="20"
-              viewBox="0 96 960 960"
-              width="20"
-            >
-              <path d="m251.333 866.406-61.739-61.739L418.26 576 189.594 347.333l61.739-61.739L480 514.26l228.667-228.666 61.739 61.739L541.74 576l228.666 228.667-61.739 61.739L480 637.74 251.333 866.406Z" />
-            </svg>
-          </button>
-          <h3>
-            Confirm reservation for:
-            <br />
-            nft.{reservation.nft}
-            <br />
-            {DateTime.fromISO(reservation.datetime).toLocaleString(
-              DateTime.DATE_SIMPLE
-            )}
-            <br />
-            {DateTime.fromISO(reservation.datetime).toLocaleString(
-              DateTime.TIME_SIMPLE
-            )}{" "}
-          </h3>
-          <br />
+        <div className="flex flex-col w-full p-3 leading-relaxed">
+          <div className="text-center text-lg">Reservation Information</div>
+          <div className="pt-2">
+            <p>NFT ID: {reservation.nft}</p>
+            <p>
+              Time:{" "}
+              {DateTime.fromISO(reservation.datetime).toLocaleString(
+                DateTime.DATETIME_MED
+              )}
+            </p>
+            <p className="whitespace-pre">Information: {reservation.content}</p>
+          </div>
+        </div>
 
-          <button className="Gen-Button">
+        <div className="grid grid-cols-2 w-full gap-2">
+          <button
+            onClick={handleClose}
+            className="py-2 mt-3 rounded-lg bg-light-green hover:bg-dark-green"
+          >
+            Cancel
+          </button>
+          <button className="py-2 mt-3 rounded-lg bg-light-green hover:bg-dark-green">
             <Link
               href={`/restaurants/reservations/${encodeURIComponent(
                 reservation.id

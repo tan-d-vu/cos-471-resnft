@@ -2,33 +2,31 @@ import prisma from "../../../../prisma/lib/prisma";
 import React, { useState } from "react";
 import { DateTime } from "luxon";
 import { ReservationModal } from "@/components/ReservationModal";
+import { InputDatetime } from "@/components/Form";
 
-
-const UserProfile = ({ reservations }) => {
+const UserProfile = ({ reservations, restaurant }) => {
   const [searchDate, setSearchDate] = useState("");
   const [searchTime, setSearchTime] = useState("");
   const [availableTimeSlots, setAvailableTimeSlots] = useState([]);
 
   const handleDateChange = (event) => {
     setSearchDate(event.target.value);
-    // Update available time slots based on selected date and time
-    updateAvailableTimeSlots(event.target.value, searchTime);
   };
 
   const handleTimeChange = (event) => {
     setSearchTime(event.target.value);
-    // Update available time slots based on selected date and time
-    updateAvailableTimeSlots(searchDate, event.target.value);
   };
 
-  const updateAvailableTimeSlots = (date, time) => {
-    let selectedTime = new Date(`${date}T${time}:00`);
+  const updateAvailableTimeSlots = () => {
+    let selectedTime = new Date(`${searchDate}T${searchTime}:00`);
     selectedTime = DateTime.fromJSDate(selectedTime);
 
     // Filter reservations to find available time slots for selected date and time
     const availableSlots = reservations.filter((reservation) => {
       const reservationDateTime = DateTime.fromISO(reservation.datetime);
-      return reservationDateTime >= selectedTime;
+      if (selectedTime.hasSame(reservationDateTime, "day")) {
+        return reservationDateTime >= selectedTime;
+      }
     });
 
     const reservationByDate = availableSlots.reduce((acc, obj) => {
@@ -44,50 +42,56 @@ const UserProfile = ({ reservations }) => {
   };
 
   return (
-    <div>
-      <div className="center-page-title">
-        <h1>Reservation List</h1>
+    <div className="flex flex-1 flex-col items-center">
+      <div className="self-center max-w-lg text-center pt-6 pb-6">
+        <h1 className="text-3xl">Search Reservations</h1>
+        <h2 className="text-2xl pt-2">{restaurant.name}</h2>
       </div>
 
-      <div className="reservation-list-container">
-        <form>
-          <label htmlFor="date">Date:</label>
-          <input
+      <div className="min-w-40 rounded-lg p-5 shadow-md">
+        <div class id="reservation-search-form">
+          <InputDatetime
             type="date"
             id="date"
+            label="Date: "
             min={DateTime.now().toISODate()}
             value={searchDate}
             onChange={handleDateChange}
           />
-          <br />
-
-          <label htmlFor="time">Time:</label>
-          <input
+          <InputDatetime
             type="time"
             id="time"
+            label="Time: "
             value={searchTime}
             onChange={handleTimeChange}
           />
-        </form>
+          <div className="text-center">
+            <button
+              type="submit"
+              className="py-2 w-full mt-3 rounded-lg bg-light-green hover:bg-dark-green"
+              onClick={updateAvailableTimeSlots}
+            >
+              Find A Time
+            </button>
+          </div>
+        </div>
 
-        <h2>Available Time Slots:</h2>
-
-        <div className="reservation-list">
-          {availableTimeSlots? (
-            <>
+        <div className="mt-5" id="reservation-search-results">
+          <h2>Available Time Slots:</h2>
+          {JSON.stringify(availableTimeSlots) !== "{}" ? (
+            <div className="grid grid-cols-3 gap-3 py-2">
               {Object.entries(availableTimeSlots).map(
                 ([date, reservations]) => (
-                  <div key={date}>
-                    <h3>{date}</h3>
+                  <>
                     {reservations.map((reservation) => (
-                       <ReservationModal reservation={reservation} />
+                      <ReservationModal reservation={reservation} />
                     ))}
-                  </div>
+                  </>
                 )
               )}
-            </>
+            </ div>
           ) : (
-            <p>No available time slots for selected date and time.</p>
+            <p>No available slots for selected date.</p>
           )}
         </div>
       </div>
@@ -107,7 +111,13 @@ export async function getServerSideProps(context) {
     },
   });
 
+  const restaurant = await prisma.user.findUnique({
+    where: {
+      pubKey: publickey,
+    },
+  });
+
   return {
-    props: { reservations: reservations },
+    props: { reservations: reservations, restaurant: restaurant },
   };
 }

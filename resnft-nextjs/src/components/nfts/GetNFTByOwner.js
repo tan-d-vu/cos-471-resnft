@@ -12,7 +12,10 @@ const NFTModal = ({ nft }) => {
 
   return (
     <>
-      <button onClick={handleShow} className="bg-green py-2 rounded-xl">
+      <button
+        onClick={handleShow}
+        className="bg-green py-2 rounded-xl hover:bg-dark-green hover:shadow-md"
+      >
         {nft.ID}
       </button>
       <Modal
