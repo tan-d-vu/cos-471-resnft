@@ -76,3 +76,16 @@ export const InputDatetime = ({ type, id, label, min, value, onChange }) => {
 
   return <InputWrapper label={label} element={element} />;
 };
+
+export const ConfirmationCheckbox = ({ text, checked, onChange }) => {  
+  return (
+    <label className="my-2">
+    <input
+      type="checkbox"
+      checked={checked}
+      onChange={onChange}
+    />
+    <span className="ml-2 text-sm text-slate-700">{text}</span>
+  </label>
+  );
+};
